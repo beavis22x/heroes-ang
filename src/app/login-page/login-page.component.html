@@ -1,1 +1,48 @@
-<p>login-page works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()" class="form_login">
+  <h2>Log In</h2>
+
+  <div class="form-control"
+       [ngClass]="{invalid: checkValid(fieldFormEnum.email)}">
+    <label for="email">Email</label>
+    <input type="email" id="email" [formControlName]="fieldFormEnum.email">
+    <div *ngIf="checkValid(fieldFormEnum.email)"
+         class="validation">
+      <small *ngIf="form.get(fieldFormEnum.email)?.errors?.required">
+        Required field
+      </small>
+      <small *ngIf="form.get(fieldFormEnum.email)?.errors?.pattern">
+        Email must have at least 3 characters before the @, @ ,
+        3-5 english letters after it, and must end in .com/.net/.org/.co/.us
+      </small>
+    </div>
+  </div>
+
+  <div class="form-control"
+       [ngClass]="{invalid: checkValid(fieldFormEnum.password)}">
+    <label for="password">Password</label>
+    <input type="password" id="password" [formControlName]="fieldFormEnum.password">
+    <div class="validation"
+         *ngIf="checkValid(fieldFormEnum.password)">
+      <small *ngIf="form.get(fieldFormEnum.password)?.errors?.required">
+        Required field
+      </small>
+      <small *ngIf="form.get(fieldFormEnum.password)?.errors?.minlength">
+        Пароль должен быть {{form.get(fieldFormEnum.password)?.errors?.minlength?.requiredLength}} символов
+      </small>
+    </div>
+  </div>
+
+  <div class="form_btns">
+    <button class="btn"
+            type="submit"
+            [disabled]="form.invalid || submitted">
+      Log in
+    </button>
+    <button class="btn"
+            type="button"
+            (click)="register()">
+      Sign Up
+    </button>
+  </div>
+
+</form>
