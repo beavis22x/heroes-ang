@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { User } from '../utils/interfaces/form.interfaces';
-import { FIELD_FORM_ENUM } from '../utils/enum/form-field.enum';
+import { User } from '../../utils/interfaces/form.interfaces';
+import { LOGIN_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
+import { emailRegEx, passwordRegEx } from '../../utils/RegExp/login.regExp';
+import { AuthService } from '../../utils/services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -12,10 +14,10 @@ import { FIELD_FORM_ENUM } from '../utils/enum/form-field.enum';
 })
 export class LoginPageComponent implements OnInit {
   public form!: FormGroup;
-  public fieldFormEnum = FIELD_FORM_ENUM;
+  public fieldFormEnum = LOGIN_FIELDS_ENUM;
   public submitted!: boolean;
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   public ngOnInit(): void {
     this.formInit();
@@ -25,12 +27,12 @@ export class LoginPageComponent implements OnInit {
     this.form = new FormGroup({
       email: new FormControl('',[
         Validators.required,
-        Validators.pattern('^([0-9a-zA-Z.]{3,})@([a-zA-Z]{2,5})\.(com|net|org|co|us)$'),
+        Validators.pattern(emailRegEx),
       ]),
       password: new FormControl('',[
         Validators.required,
         Validators.minLength(5),
-        Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{5,}$'),
+        Validators.pattern(passwordRegEx),
       ]),
     })
   }
@@ -43,8 +45,9 @@ export class LoginPageComponent implements OnInit {
     const user: User = {
       email: this.form.value?.email,
       password: this.form.value?.password,
+      id: String(Math.floor(Math.random() * 90000)),
     }
-
+    this.auth.logIn(user);
     this.submitted = true;
       this.form.reset();
   }
@@ -54,6 +57,10 @@ export class LoginPageComponent implements OnInit {
   }
 
   register() {
-    console.log(this.form)
+    localStorage.setItem('23451', JSON.stringify({
+      email: 'new.email.user@dd.co',
+      password: 'ssD12@#$dd',
+      id: '23451',
+    }) )
   }
 }
