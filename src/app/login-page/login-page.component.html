@@ -12,7 +12,8 @@
       </small>
       <small *ngIf="form.get(fieldFormEnum.email)?.errors?.pattern">
         Email must have at least 3 characters before the @, @ ,
-        3-5 english letters after it, and must end in .com/.net/.org/.co/.us
+        3-5 english letters after it, and must end in .com/.net/.org/.co/.us <br>
+        Example: new.email.user@dd.co
       </small>
     </div>
   </div>
@@ -27,7 +28,11 @@
         Required field
       </small>
       <small *ngIf="form.get(fieldFormEnum.password)?.errors?.minlength">
-        Пароль должен быть {{form.get(fieldFormEnum.password)?.errors?.minlength?.requiredLength}} символов
+        Password length minimum {{form.get(fieldFormEnum.password)?.errors?.minlength?.requiredLength}} characters  <br>
+      </small>
+      <small *ngIf="form.get(fieldFormEnum.password)?.errors?.pattern">
+        Password must include number, small and big english letters
+        example: ssD12@#$dd
       </small>
     </div>
   </div>

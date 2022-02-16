@@ -25,11 +25,12 @@ export class LoginPageComponent implements OnInit {
     this.form = new FormGroup({
       email: new FormControl('',[
         Validators.required,
-        Validators.pattern('/^([0-9a-zA-Z\.]{3,})@([a-zA-Z]{2,5})\.(com|net|org|co|us)$/gm'),
+        Validators.pattern('^([0-9a-zA-Z.]{3,})@([a-zA-Z]{2,5})\.(com|net|org|co|us)$'),
       ]),
       password: new FormControl('',[
         Validators.required,
         Validators.minLength(5),
+        Validators.pattern('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#\$%\^&\*]).{5,}$'),
       ]),
     })
   }
