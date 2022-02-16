@@ -1,5 +1,22 @@
-<form [formGroup]="form" (ngSubmit)="submit()" class="form_login">
+<form [formGroup]="form" class="form_login">
   <h2>Sign Up</h2>
+
+  <div class="form-control"
+       [ngClass]="{invalid: checkValid(fieldFormEnum.login)}">
+    <label for="login">Login</label>
+    <input type="text" id="login" [formControlName]="fieldFormEnum.login">
+    <div *ngIf="checkValid(fieldFormEnum.login)"
+         class="validation">
+      <small *ngIf="form.get(fieldFormEnum.login)?.errors?.required">
+        Required field
+      </small>
+      <small *ngIf="form.get(fieldFormEnum.login)?.errors?.pattern">
+        Field may include english letters and numbers <br>
+        Field should contain at least 8 characters <br>
+        example: userKebab
+      </small>
+    </div>
+  </div>
 
   <div class="form-control"
        [ngClass]="{invalid: checkValid(fieldFormEnum.email)}">
@@ -37,18 +54,12 @@
     </div>
   </div>
 
-  <div class="form_btns">
-    <button class="btn"
-            type="submit"
-            [disabled]="form.invalid || submitted">
-      Log in
-    </button>
-    <button class="btn"
-            type="button"
-            (click)="register()">
-      Sign Up
-    </button>
-  </div>
+  <button class="btn"
+          type="button"
+          [disabled]="form.invalid"
+          (click)="register()">
+    Sign Up
+  </button>
 
 </form>
 

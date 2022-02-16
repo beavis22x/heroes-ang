@@ -23,18 +23,14 @@ export class AuthService {
 
   public logIn(user: User): void {
     this.setToken();
-    // console.log(user.id)
     if(user.id === localStorage.getItem(<string>user.id) && this.token) {
 
     }
+  }
 
-    // return this.http.post<FbAuthResponse | null>(
-    //   `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,
-    //   user
-    // ).pipe(
-    //   tap(this.setToken),
-    //   catchError(() => of(this.handleError.bind(this)))
-    // )
+  public signUp(user: User): void {
+    localStorage.setItem(<string>user.id, JSON.stringify(user));
+    this.setToken();
   }
 
   public logOut(): void {
@@ -44,19 +40,6 @@ export class AuthService {
   public isAuthenticated(): boolean {
     return !!this.token;
   }
-
-  // public handleError(error: HttpErrorResponse): void {
-  //   const {message} = error?.error?.error;
-  //
-  //   switch(message) {
-  //     case INVALID_PASSWORD:
-  //       this.error$.next('Неверный пароль')
-  //       break;
-  //     case EMAIL_NOT_FOUND:
-  //       this.error$.next('Данный email не зарегистрирован')
-  //       break;
-  //   }
-  // }
 
   private setToken(flag?: boolean): void {
     if(!flag) {

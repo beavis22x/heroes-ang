@@ -1,10 +1,19 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { User } from '../../utils/interfaces/form.interfaces';
-import { LOGIN_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
-import { emailRegEx, passwordRegEx } from '../../utils/RegExp/login.regExp';
 import { AuthService } from '../../utils/services/auth.service';
+
+import { RouteConfigs } from '../../utils/interfaces/routes.interfaces';
+import { User } from '../../utils/interfaces/form.interfaces';
+
+import { LOGIN_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
+
+import { minLength } from '../../utils/const/validators.const'
+import { ROUTE_CONFIGS } from '../../utils/const/routes.consts';
+
+import { emailRegEx, passwordRegEx } from '../../utils/RegExp/login.regExp';
 
 @Component({
   selector: 'app-login-page',
@@ -16,8 +25,12 @@ export class LoginPageComponent implements OnInit {
   public form!: FormGroup;
   public fieldFormEnum = LOGIN_FIELDS_ENUM;
   public submitted!: boolean;
+  public routes: RouteConfigs = ROUTE_CONFIGS;
 
-  constructor(private auth: AuthService) { }
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) { }
 
   public ngOnInit(): void {
     this.formInit();
@@ -31,7 +44,7 @@ export class LoginPageComponent implements OnInit {
       ]),
       password: new FormControl('',[
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(minLength),
         Validators.pattern(passwordRegEx),
       ]),
     })
@@ -56,11 +69,7 @@ export class LoginPageComponent implements OnInit {
     return (this.form.get(fieldStr)?.touched && this.form.get(fieldStr)?.invalid);
   }
 
-  register() {
-    localStorage.setItem('23451', JSON.stringify({
-      email: 'new.email.user@dd.co',
-      password: 'ssD12@#$dd',
-      id: '23451',
-    }) )
+  public register(): void {
+    this.router.navigate([this.routes.registration.path])
   }
 }
