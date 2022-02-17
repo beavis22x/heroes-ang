@@ -1,0 +1,54 @@
+<form [formGroup]="form" (ngSubmit)="submit()" class="form_login">
+  <h2>Sign Up</h2>
+
+  <div class="form-control"
+       [ngClass]="{invalid: checkValid(fieldFormEnum.email)}">
+    <label for="email">Email</label>
+    <input type="email" id="email" [formControlName]="fieldFormEnum.email">
+    <div *ngIf="checkValid(fieldFormEnum.email)"
+         class="validation">
+      <small *ngIf="form.get(fieldFormEnum.email)?.errors?.required">
+        Required field
+      </small>
+      <small *ngIf="form.get(fieldFormEnum.email)?.errors?.pattern">
+        Email must have at least 3 characters before the @, @ ,
+        3-5 english letters after it, and must end in .com/.net/.org/.co/.us <br>
+        Example: new.email.user@dd.co
+      </small>
+    </div>
+  </div>
+
+  <div class="form-control"
+       [ngClass]="{invalid: checkValid(fieldFormEnum.password)}">
+    <label for="password">Password</label>
+    <input type="password" id="password" [formControlName]="fieldFormEnum.password">
+    <div class="validation"
+         *ngIf="checkValid(fieldFormEnum.password)">
+      <small *ngIf="form.get(fieldFormEnum.password)?.errors?.required">
+        Required field
+      </small>
+      <small *ngIf="form.get(fieldFormEnum.password)?.errors?.minlength">
+        Password length minimum {{form.get(fieldFormEnum.password)?.errors?.minlength?.requiredLength}} characters  <br>
+      </small>
+      <small *ngIf="form.get(fieldFormEnum.password)?.errors?.pattern">
+        Password must include number, small and big english letters
+        example: ssD12@#$dd
+      </small>
+    </div>
+  </div>
+
+  <div class="form_btns">
+    <button class="btn"
+            type="submit"
+            [disabled]="isDisabled">
+      Log in
+    </button>
+    <button class="btn"
+            type="button"
+            (click)="register()">
+      Sign Up
+    </button>
+  </div>
+
+</form>
+

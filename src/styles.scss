@@ -1,1 +1,158 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #219ebc;
+  --dark-color: #333333;
+  --light-color: #f4f4f4;
+  --danger-color: #ef233c;
+  --success-color: #28a745;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
+  background-color: #8ecae6;
+}
+
+a {
+  color: var(--dark-color);
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    color: #666;
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 2rem;
+  overflow: hidden;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding: 0.7rem 2rem;
+  width: 100%;
+  background-color: var(--primary-color);
+}
+
+ul,
+.app_logo {
+  display: flex;
+  align-items: center;
+}
+
+h1 {
+  margin: 0 10px;
+}
+
+li {
+  margin: 0 10px;
+}
+
+.app_logo__img,
+.hero_log__img {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  margin: 0 10px 0;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  font-weight: bold ;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 2rem;
+  overflow: hidden;
+}
+
+.form-control {
+  display: block;
+  margin-bottom: 0.8rem;
+  color: #333;
+
+  &.invalid {
+    color: var(--danger-color);
+    font-weight: bold;
+
+    input {
+      border: 4px solid var(--danger-color);
+      border-color: var(--danger-color);
+    }
+  }
+
+  .validation {
+    color: var(--danger-color);
+  }
+}
+
+.btn {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0.4rem 1.3rem;
+  font-size: 1rem;
+  color: #333;
+  background-color: var(--primary-color);
+  border: none;
+  cursor: pointer;
+  transition: opacity .2s ease-in;
+  outline: none;
+
+    &[disabled] {
+      color: #111;
+      background-color: var(--light-color);
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      &:not([disabled]) {
+        opacity: 0.6;
+    }
+  }
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='date'],
+select,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+}
+
+
+
