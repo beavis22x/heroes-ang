@@ -12,7 +12,7 @@ import { minLengthPass } from '../utils/const/validators.const';
 
 import { emailRegEx, passwordRegEx } from '../utils/RegExp/login.regExp';
 
-import { randomId } from '../utils/functions/func';
+import { randomId } from '../utils/functions/common.functions';
 
 @Component({
   selector: 'app-registration',
