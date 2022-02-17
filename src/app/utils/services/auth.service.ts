@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+
 import { User } from '../interfaces/form.interfaces';
+
 import { AUTH_ENUM } from '../enum/auth.enum';
 
 @Injectable({
@@ -39,7 +41,7 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    return !!this.token;
+    return Boolean(this.token);
   }
 
   private setToken(flag?: boolean): void {

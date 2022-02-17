@@ -9,11 +9,13 @@ import { User } from '../utils/interfaces/form.interfaces';
 import { RouteConfigs } from '../utils/interfaces/routes.interfaces';
 
 import { REGISTER_FIELDS_ENUM } from '../utils/enum/form-field.enum';
-
+import { LOGIN_FIELDS_ENUM } from '../utils/enum/form-field.enum';
 import { ROUTE_CONFIGS } from '../utils/const/routes.consts';
 import { minLengthlogin, minLengthPass } from '../utils/const/validators.const';
 
 import { emailRegEx, loginRegEx, passwordRegEx } from '../utils/RegExp/login.regExp';
+
+import { randomId } from '../utils/functions/common.functions';
 
 @Component({
   selector: 'app-registration',
@@ -24,13 +26,17 @@ import { emailRegEx, loginRegEx, passwordRegEx } from '../utils/RegExp/login.reg
 export class RegistrationComponent implements OnInit {
   public form!: FormGroup;
   public fieldFormEnum = REGISTER_FIELDS_ENUM;
-  public submitted!: boolean;
   public routes: RouteConfigs = ROUTE_CONFIGS;
+  private submitted: boolean = false;
 
   constructor(
     private auth: AuthService,
     private router: Router
   ) {
+  }
+
+  get isDisabled(): boolean {
+    return this.form.invalid || this.submitted
   }
 
   public ngOnInit(): void {
@@ -69,7 +75,7 @@ export class RegistrationComponent implements OnInit {
     const user: User = {
       email: this.form.value?.email,
       password: this.form.value?.password,
-      id: String(Math.floor(Math.random() * 90000)),
+      id: randomId()
     }
 
     this.auth.signUp(user);

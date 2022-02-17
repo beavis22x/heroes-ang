@@ -15,6 +15,8 @@ import { ROUTE_CONFIGS } from '../../utils/const/routes.consts';
 
 import { emailRegEx, passwordRegEx } from '../../utils/RegExp/login.regExp';
 
+import { randomId } from '../../utils/functions/common.functions';
+
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
@@ -24,16 +26,20 @@ import { emailRegEx, passwordRegEx } from '../../utils/RegExp/login.regExp';
 export class LoginPageComponent implements OnInit {
   public form!: FormGroup;
   public fieldFormEnum = LOGIN_FIELDS_ENUM;
-  public submitted!: boolean;
   public routes: RouteConfigs = ROUTE_CONFIGS;
   public messageInfo = emptyString;
   public messageDanger = emptyString;
+  private submitted: boolean = false;
 
   constructor(
     private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
   ) { }
+
+  get isDisabled(): boolean {
+   return this.form.invalid || this.submitted
+  }
 
   public ngOnInit(): void {
     this.validationInit();
@@ -70,7 +76,7 @@ export class LoginPageComponent implements OnInit {
       const user: User = {
         email: this.form.value?.email,
         password: this.form.value?.password,
-        id: String(Math.floor(Math.random() * 90000)),
+        id: randomId()
       }
 
       this.auth.logIn(user);
