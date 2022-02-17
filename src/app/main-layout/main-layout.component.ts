@@ -1,5 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AuthService } from '../utils/services/auth.service';
+import { Router } from '@angular/router';
+import { RouteConfigs } from '../utils/interfaces/routes.interfaces';
+import { ROUTE_CONFIGS } from '../utils/const/routes.consts';
 
 @Component({
   selector: 'app-main-layout',
@@ -8,11 +11,16 @@ import { AuthService } from '../utils/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainLayoutComponent {
+  public routes: RouteConfigs = ROUTE_CONFIGS;
 
-  constructor(private auth: AuthService) {
+  constructor(
+    public auth: AuthService,
+    private router: Router
+  ) {
   }
 
   public logout(): void {
     this.auth.logOut();
+    this.router.navigate([this.routes.login.path]);
   }
 }

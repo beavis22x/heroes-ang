@@ -12,7 +12,8 @@
     </a>
 
 
-    <div class="header_menu">
+    <div *ngIf="auth.isAuthenticated()"
+      class="header_menu">
       <ul>
         <li>
           <a>Home</a>
