@@ -1,0 +1,48 @@
+.invalid {
+  border: #ef233c;
+}
+
+hr {
+  border: 2px solid #7daded;
+}
+
+ul {
+  display: block;
+  list-style: none;
+}
+
+.card-hero__content {
+  display: grid;
+  grid-template: repeat(auto-fit, 280px)/repeat(auto-fit, 460px);
+  justify-content: space-around;
+}
+
+.card-hero__item {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  grid-template-rows: 1fr;
+  margin: 20px 20px 0 0;
+  justify-content: space-between;
+  align-items: center;
+  justify-items: center;
+  border-radius: 20%;
+  border: 2px solid #4f7196;
+}
+
+.card-hero__img {
+  display: grid;
+  grid-template: 80% 10%/100%;
+  height: 280px;
+  width: 222px;
+  grid-row-gap: 10px;
+  padding: 10px 10px 0 10px;
+}
+
+.card-hero__select-btn {
+  width: 40%;
+  margin: 0 auto;
+  border-radius: 15%;
+  font-weight: bold;
+  background-color: #2ec4b6;
+  cursor: pointer;
+}

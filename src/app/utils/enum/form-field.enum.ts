@@ -9,6 +9,10 @@ export enum REGISTER_FIELDS_ENUM {
   login = 'login'
 }
 
+export enum SEARCH_FIELD_ENUM {
+  search = 'search_panel'
+}
+
 export enum ALERT_ENUM {
   loginAgain = 'Filled data',
   unsigned = 'Invalid email or password',
