@@ -8,3 +8,8 @@ export enum REGISTER_FIELDS_ENUM {
   password = 'password',
   login = 'login'
 }
+
+export enum ALERT_ENUM {
+  loginAgain = 'Filled data',
+  unsigned = 'You must sign Up'
+}

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -8,9 +8,9 @@ import { AuthService } from '../../utils/services/auth.service';
 import { RouteConfigs } from '../../utils/interfaces/routes.interfaces';
 import { User } from '../../utils/interfaces/form.interfaces';
 
-import { LOGIN_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
+import { ALERT_ENUM, LOGIN_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
 
-import { minLengthPass } from '../../utils/const/validators.const'
+import { emptyString, minLengthPass } from '../../utils/const/validators.const'
 import { ROUTE_CONFIGS } from '../../utils/const/routes.consts';
 
 import { emailRegEx, passwordRegEx } from '../../utils/RegExp/login.regExp';
@@ -26,14 +26,26 @@ export class LoginPageComponent implements OnInit {
   public fieldFormEnum = LOGIN_FIELDS_ENUM;
   public submitted!: boolean;
   public routes: RouteConfigs = ROUTE_CONFIGS;
+  public messageInfo = emptyString;
+  public messageDanger = emptyString;
 
   constructor(
     private auth: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute,
   ) { }
 
   public ngOnInit(): void {
+    this.validationInit();
     this.formInit();
+  }
+
+  public validationInit():void {
+    this.route.queryParams.subscribe((params: Params) => {
+      if(params['loginAgain']) {
+        this.messageInfo = ALERT_ENUM.loginAgain;
+      }
+    })
   }
 
   public formInit(): void {
@@ -51,19 +63,20 @@ export class LoginPageComponent implements OnInit {
   }
 
   public submit(): void {
-    if (this.form?.invalid) {
-      return
-    }
+    if (this.form.value?.email !== localStorage.getItem(<string>this.form.value?.email)) {
+      this.messageDanger = ALERT_ENUM.unsigned;
+      return;
+    } else {
+      const user: User = {
+        email: this.form.value?.email,
+        password: this.form.value?.password,
+        id: String(Math.floor(Math.random() * 90000)),
+      }
 
-    const user: User = {
-      email: this.form.value?.email,
-      password: this.form.value?.password,
-      id: String(Math.floor(Math.random() * 90000)),
+      this.auth.logIn(user);
+      this.submitted = true;
+      this.form.reset();
     }
-
-    this.auth.logIn(user);
-    this.submitted = true;
-    this.form.reset();
   }
 
   public checkValid(fieldStr: string): boolean  {

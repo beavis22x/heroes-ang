@@ -22,10 +22,10 @@ export class AuthService {
   }
 
   public logIn(user: User): void {
-    if(user.email === localStorage.getItem(<string>user.email) && this.token) {
-      return
-    } else {
+    if(user.email === localStorage.getItem(<string>user.email) && !this.token) {
       this.setToken();
+    } else {
+      return
     }
   }
 

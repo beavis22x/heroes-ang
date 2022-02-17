@@ -151,5 +151,21 @@ textarea {
   border: 1px solid #ccc;
 }
 
+.alert-danger {
+  padding: 0.7rem 1rem;
+  margin: 1rem 0;
+  color: #fff;
+  background: var(--danger-color);
+  opacity: 0.9;
+}
+
+.alert-info {
+  padding: 0.7rem 1rem;
+  margin: 1rem 0;
+  font-weight: bold;
+  color: #333;
+  background: var(--light-color);
+  opacity: 0.6;
+}
 
 

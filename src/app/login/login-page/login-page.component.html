@@ -1,6 +1,13 @@
 <form [formGroup]="form" (ngSubmit)="submit()" class="form_login">
   <h2>Log In</h2>
 
+  <div *ngIf="this.messageDanger" class="alert-danger">
+    {{ messageDanger }}
+  </div>
+  <div *ngIf="this.messageInfo" class="alert-info">
+    {{ messageInfo }}
+  </div>
+
   <div class="form-control"
        [ngClass]="{invalid: checkValid(fieldFormEnum.email)}">
     <label for="email">Email</label>
@@ -28,7 +35,7 @@
         Required field
       </small>
       <small *ngIf="form.get(fieldFormEnum.password)?.errors?.minlength">
-        Password length minimum {{form.get(fieldFormEnum.password)?.errors?.minlength?.requiredLength}} characters  <br>
+        Password length minimum {{form.get(fieldFormEnum.password)?.errors?.minlength?.requiredLength}} characters <br>
       </small>
       <small *ngIf="form.get(fieldFormEnum.password)?.errors?.pattern">
         Password must include number, small and big english letters

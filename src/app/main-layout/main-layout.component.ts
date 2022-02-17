@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AuthService } from '../utils/services/auth.service';
 import { Router } from '@angular/router';
+
+import { AuthService } from '../utils/services/auth.service';
+
 import { RouteConfigs } from '../utils/interfaces/routes.interfaces';
+
 import { ROUTE_CONFIGS } from '../utils/const/routes.consts';
 
 @Component({
