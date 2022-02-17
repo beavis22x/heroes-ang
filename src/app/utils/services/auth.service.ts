@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
+
 import { User } from '../interfaces/form.interfaces';
+
 import { AUTH_ENUM } from '../enum/auth.enum';
 
 @Injectable({
@@ -22,19 +24,11 @@ export class AuthService {
   }
 
   public logIn(user: User): void {
-    this.setToken();
-    // console.log(user.id)
-    if(user.id === localStorage.getItem(<string>user.id) && this.token) {
-
+    if(user.email === localStorage.getItem(<string>user.email) && this.token) {
+      this.setToken();
+    } else {
+      return
     }
-
-    // return this.http.post<FbAuthResponse | null>(
-    //   `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,
-    //   user
-    // ).pipe(
-    //   tap(this.setToken),
-    //   catchError(() => of(this.handleError.bind(this)))
-    // )
   }
 
   public logOut(): void {
@@ -42,21 +36,8 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    return !!this.token;
+    return Boolean(this.token);
   }
-
-  // public handleError(error: HttpErrorResponse): void {
-  //   const {message} = error?.error?.error;
-  //
-  //   switch(message) {
-  //     case INVALID_PASSWORD:
-  //       this.error$.next('Неверный пароль')
-  //       break;
-  //     case EMAIL_NOT_FOUND:
-  //       this.error$.next('Данный email не зарегистрирован')
-  //       break;
-  //   }
-  // }
 
   private setToken(flag?: boolean): void {
     if(!flag) {

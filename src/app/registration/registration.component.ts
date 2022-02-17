@@ -7,7 +7,12 @@ import { AuthService } from '../utils/services/auth.service';
 import { User } from '../utils/interfaces/form.interfaces';
 
 import { LOGIN_FIELDS_ENUM } from '../utils/enum/form-field.enum';
+
+import { minLengthPass } from '../utils/const/validators.const';
+
 import { emailRegEx, passwordRegEx } from '../utils/RegExp/login.regExp';
+
+import { randomId } from '../utils/functions/func';
 
 @Component({
   selector: 'app-registration',
@@ -17,9 +22,13 @@ import { emailRegEx, passwordRegEx } from '../utils/RegExp/login.regExp';
 export class RegistrationComponent implements OnInit {
   public form!: FormGroup;
   public fieldFormEnum = LOGIN_FIELDS_ENUM;
-  public submitted!: boolean;
+  private submitted: boolean = false;
 
   constructor(private auth: AuthService) {
+  }
+
+  get isDisabled(): boolean {
+    return this.form.invalid || this.submitted
   }
 
   public ngOnInit(): void {
@@ -34,7 +43,7 @@ export class RegistrationComponent implements OnInit {
       ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(minLengthPass),
         Validators.pattern(passwordRegEx),
       ]),
     })
@@ -48,22 +57,17 @@ export class RegistrationComponent implements OnInit {
     const user: User = {
       email: this.form.value?.email,
       password: this.form.value?.password,
-      id: String(Math.floor(Math.random() * 90000)),
+      id: randomId()
     }
     this.auth.logIn(user);
     this.submitted = true;
     this.form.reset();
   }
 
-  public checkValid(fieldStr: string): boolean | undefined {
-    return (this.form.get(fieldStr)?.touched && this.form.get(fieldStr)?.invalid);
+  public checkValid(fieldStr: string): boolean {
+    return Boolean(this.form.get(fieldStr)?.touched && this.form.get(fieldStr)?.invalid);
   }
 
-  register() {
-    localStorage.setItem('23451', JSON.stringify({
-      email: 'new.email.user@dd.co',
-      password: 'ssD12@#$dd',
-      id: '23451',
-    }))
+  public register(): void {
   }
 }
