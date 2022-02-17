@@ -35,10 +35,11 @@ export class LoginPageComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-  ) { }
+  ) {
+  }
 
   get isDisabled(): boolean {
-   return this.form.invalid || this.submitted
+    return this.form.invalid || this.submitted
   }
 
   public ngOnInit(): void {
@@ -46,9 +47,9 @@ export class LoginPageComponent implements OnInit {
     this.formInit();
   }
 
-  public validationInit():void {
+  public validationInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
-      if(params['loginAgain']) {
+      if (params['loginAgain']) {
         this.messageInfo = ALERT_ENUM.loginAgain;
       }
     })
@@ -56,11 +57,11 @@ export class LoginPageComponent implements OnInit {
 
   public formInit(): void {
     this.form = new FormGroup({
-      email: new FormControl('',[
+      email: new FormControl('', [
         Validators.required,
         Validators.pattern(emailRegEx),
       ]),
-      password: new FormControl('',[
+      password: new FormControl('', [
         Validators.required,
         Validators.minLength(minLengthPass),
         Validators.pattern(passwordRegEx),
@@ -69,23 +70,21 @@ export class LoginPageComponent implements OnInit {
   }
 
   public submit(): void {
-    if (this.form.value?.email !== localStorage.getItem(<string>this.form.value?.email)) {
+    const userObj = JSON.parse(<string>localStorage.getItem(<string>this.form.value?.email));
+
+    if (this.form.value?.email !== userObj?.email) {
       this.messageDanger = ALERT_ENUM.unsigned;
+
       return;
     } else {
-      const user: User = {
-        email: this.form.value?.email,
-        password: this.form.value?.password,
-        id: randomId()
-      }
-
-      this.auth.logIn(user);
+      this.auth.logIn();
       this.submitted = true;
+      this.router.navigate([this.routes.heroes.path]);
       this.form.reset();
     }
   }
 
-  public checkValid(fieldStr: string): boolean  {
+  public checkValid(fieldStr: string): boolean {
     return Boolean(this.form.get(fieldStr)?.touched && this.form.get(fieldStr)?.invalid);
   }
 

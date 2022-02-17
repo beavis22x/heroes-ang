@@ -23,8 +23,8 @@ export class AuthService {
     return localStorage.getItem(this.authToken.token);
   }
 
-  public logIn(user: User): void {
-    if(user.email === localStorage.getItem(<string>user.email) && !this.token) {
+  public logIn(): void {
+    if(!this.token) {
       this.setToken();
     } else {
       return
@@ -41,7 +41,7 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    return Boolean(this.token);
+    return Boolean(<string>this.token);
   }
 
   private setToken(flag?: boolean): void {

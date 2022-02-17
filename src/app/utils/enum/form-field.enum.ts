@@ -11,5 +11,5 @@ export enum REGISTER_FIELDS_ENUM {
 
 export enum ALERT_ENUM {
   loginAgain = 'Filled data',
-  unsigned = 'You must sign Up'
+  unsigned = 'Invalid email or password',
 }

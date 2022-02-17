@@ -9,7 +9,7 @@ import { User } from '../utils/interfaces/form.interfaces';
 import { RouteConfigs } from '../utils/interfaces/routes.interfaces';
 
 import { REGISTER_FIELDS_ENUM } from '../utils/enum/form-field.enum';
-import { LOGIN_FIELDS_ENUM } from '../utils/enum/form-field.enum';
+
 import { ROUTE_CONFIGS } from '../utils/const/routes.consts';
 import { minLengthlogin, minLengthPass } from '../utils/const/validators.const';
 
@@ -79,7 +79,7 @@ export class RegistrationComponent implements OnInit {
     }
 
     this.auth.signUp(user);
-    this.router.navigate([this.routes.heroes.path])
+    this.router.navigate([this.routes.heroes.path]);
     this.form.reset();
   }
 }
