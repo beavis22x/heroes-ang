@@ -10,7 +10,7 @@ import { User } from '../../utils/interfaces/form.interfaces';
 
 import { LOGIN_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
 
-import { minLength } from '../../utils/const/validators.const'
+import { minLengthPass } from '../../utils/const/validators.const'
 import { ROUTE_CONFIGS } from '../../utils/const/routes.consts';
 
 import { emailRegEx, passwordRegEx } from '../../utils/RegExp/login.regExp';
@@ -44,7 +44,7 @@ export class LoginPageComponent implements OnInit {
       ]),
       password: new FormControl('',[
         Validators.required,
-        Validators.minLength(minLength),
+        Validators.minLength(minLengthPass),
         Validators.pattern(passwordRegEx),
       ]),
     })
@@ -60,13 +60,14 @@ export class LoginPageComponent implements OnInit {
       password: this.form.value?.password,
       id: String(Math.floor(Math.random() * 90000)),
     }
+
     this.auth.logIn(user);
     this.submitted = true;
-      this.form.reset();
+    this.form.reset();
   }
 
-  public checkValid(fieldStr: string): boolean | undefined {
-    return (this.form.get(fieldStr)?.touched && this.form.get(fieldStr)?.invalid);
+  public checkValid(fieldStr: string): boolean  {
+    return Boolean(this.form.get(fieldStr)?.touched && this.form.get(fieldStr)?.invalid);
   }
 
   public register(): void {

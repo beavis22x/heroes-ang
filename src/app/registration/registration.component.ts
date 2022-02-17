@@ -11,6 +11,7 @@ import { RouteConfigs } from '../utils/interfaces/routes.interfaces';
 import { REGISTER_FIELDS_ENUM } from '../utils/enum/form-field.enum';
 
 import { ROUTE_CONFIGS } from '../utils/const/routes.consts';
+import { minLengthlogin, minLengthPass } from '../utils/const/validators.const';
 
 import { emailRegEx, loginRegEx, passwordRegEx } from '../utils/RegExp/login.regExp';
 
@@ -40,6 +41,7 @@ export class RegistrationComponent implements OnInit {
     this.form = new FormGroup({
       login: new FormControl('', [
           Validators.required,
+          Validators.minLength(minLengthlogin),
           Validators.pattern(loginRegEx),
         ]
       ),
@@ -49,19 +51,19 @@ export class RegistrationComponent implements OnInit {
       ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(5),
+        Validators.minLength(minLengthPass),
         Validators.pattern(passwordRegEx),
       ]),
     })
   }
 
-  public checkValid(fieldStr: string): boolean | undefined {
-    return (this.form.get(fieldStr)?.touched && this.form.get(fieldStr)?.invalid);
+  public checkValid(fieldStr: string): boolean {
+    return Boolean(this.form.get(fieldStr)?.touched && this.form.get(fieldStr)?.invalid);
   }
 
   public register(): void{
     if (this.form?.invalid) {
-      return
+      return;
     }
 
     const user: User = {

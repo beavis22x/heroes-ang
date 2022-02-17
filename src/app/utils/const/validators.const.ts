@@ -1,1 +1,2 @@
-export const minLength = 5;
+export const minLengthPass = 5;
+export const minLengthlogin = 8;

@@ -10,9 +10,11 @@
       <small *ngIf="form.get(fieldFormEnum.login)?.errors?.required">
         Required field
       </small>
+      <small *ngIf="form.get(fieldFormEnum.login)?.errors?.minlength">
+        Field should contain at least 8 characters <br>
+      </small>
       <small *ngIf="form.get(fieldFormEnum.login)?.errors?.pattern">
         Field may include english letters and numbers <br>
-        Field should contain at least 8 characters <br>
         example: userKebab
       </small>
     </div>
@@ -45,7 +47,7 @@
         Required field
       </small>
       <small *ngIf="form.get(fieldFormEnum.password)?.errors?.minlength">
-        Password length minimum {{form.get(fieldFormEnum.password)?.errors?.minlength?.requiredLength}} characters  <br>
+        Password length minimum {{form.get(fieldFormEnum.password)?.errors?.minlength?.requiredLength}} characters <br>
       </small>
       <small *ngIf="form.get(fieldFormEnum.password)?.errors?.pattern">
         Password must include number, small and big english letters
