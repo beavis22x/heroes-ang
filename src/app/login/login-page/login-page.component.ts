@@ -6,7 +6,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../utils/services/auth.service';
 
 import { RouteConfigs } from '../../utils/interfaces/routes.interfaces';
-import { User } from '../../utils/interfaces/form.interfaces';
 
 import { ALERT_ENUM, LOGIN_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
 
@@ -15,7 +14,6 @@ import { ROUTE_CONFIGS } from '../../utils/const/routes.consts';
 
 import { emailRegEx, passwordRegEx } from '../../utils/RegExp/login.regExp';
 
-import { randomId } from '../../utils/functions/common.functions';
 
 @Component({
   selector: 'app-login-page',

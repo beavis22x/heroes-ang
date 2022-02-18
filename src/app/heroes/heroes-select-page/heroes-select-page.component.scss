@@ -1,3 +1,9 @@
+.container-select{
+  margin: 0 auto;
+  padding: 0 3rem;
+  font-size: 1.2rem;
+}
+
 .invalid {
   border: #ef233c;
 }
@@ -13,8 +19,8 @@ ul {
 
 .card-hero__content {
   display: grid;
-  grid-template: repeat(auto-fit, 280px)/repeat(auto-fit, 460px);
-  justify-content: space-around;
+  justify-content: space-evenly;
+  grid-template-columns: repeat(auto-fit, minmax(460px, 50%));
 }
 
 .card-hero__item {
@@ -35,7 +41,7 @@ ul {
   height: 280px;
   width: 222px;
   grid-row-gap: 10px;
-  padding: 10px 10px 0 10px;
+  padding: 30px 10px 0 20px;
 }
 
 .card-hero__select-btn {
@@ -45,4 +51,16 @@ ul {
   font-weight: bold;
   background-color: #2ec4b6;
   cursor: pointer;
+
+    &[disabled] {
+      background-color: #fff;
+    }
+}
+
+.form-search__recent {
+  cursor: pointer;
+
+    &:hover {
+        opacity: 0.6;
+      }
 }

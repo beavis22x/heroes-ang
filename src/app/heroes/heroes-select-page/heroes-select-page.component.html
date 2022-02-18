@@ -1,99 +1,57 @@
-<form [formGroup]="form" class="form-search">
-  <div class="form-control"
-       [ngClass]="{invalid: checkValid(searchFieldEnum.search)}">
-    <label for="search_panel">Choose your fighter</label>
-    <input type="text" id="search_panel" [formControlName]="searchFieldEnum.search">
-    <div *ngIf="checkValid(searchFieldEnum.search)"
-         class="validation">
-      <small *ngIf="form.get(searchFieldEnum.search)?.errors?.pattern">
-        Field allows only english letters
+<div class="container-select">
+  <form [formGroup]="form" class="form-search">
+    <div class="form-control"
+         [ngClass]="{invalid: checkValid(searchFieldEnum.search)}">
+      <label for="search_panel">Choose your fighter</label>
+      <input type="text" id="search_panel" [formControlName]="searchFieldEnum.search">
+      <div *ngIf="checkValid(searchFieldEnum.search)"
+           class="validation">
+        <small *ngIf="form.get(searchFieldEnum.search)?.errors?.pattern">
+          Field allows only english letters
+        </small>
+      </div>
+    </div>
+    <div class="form-search__chip">
+      <span class="form-search__recent"
+            (click)="toggleDisplayRecent()">
+        Recent search
+      </span>
+      <small *ngIf="recentView">
+        {{ searchList }}
       </small>
     </div>
-  </div>
-  <div class="form-search__chip">
-    <a>Recent search</a>
-  </div>
-</form>
+  </form>
 
-<br>
-<hr>
+  <br>
+  <hr>
 
-<div class="card-hero">
-  <div class="card-hero__result">
-    Results:
+  <div class="result">
+    Results: {{ results }}
   </div>
-  <div class="card-hero__content">
-    <div class="card-hero__item">
-      <div class="card-hero__img">
-        <img src="https://www.pngall.com/wp-content/uploads/11/Hero-PNG-Cutout.png" alt="hero">
-        <button class="card-hero__select-btn">Select</button>
-      </div>
-      <div class="card-hero__description">
-        <ul>
-          <li>Name: </li>
-          <li>Combat: </li>
-          <li>Durability: </li>
-          <li>Intelligence: </li>
-          <li>Power: </li>
-          <li>Speed: </li>
-          <li>Strength: </li>
-        </ul>
+
+  <div class="card-hero">
+    <div class="card-hero__content">
+      <div *ngFor="let hero of heroes" class="card-hero__item">
+        <div class="card-hero__img">
+          <img [src]="hero.image" alt="hero">
+          <button class="card-hero__select-btn"
+                  (click)="selectHero($event, hero.id)">
+            Select
+          </button>
+        </div>
+        <div class="card-hero__description">
+          <ul>
+            <li><h2>{{hero.name}}</h2></li>
+            <li>Combat: {{hero.powerstats.combat}}</li>
+            <li>Durability: {{hero.powerstats.durability}}</li>
+            <li>Intelligence: {{hero.powerstats.intelligence}}</li>
+            <li>Power: {{hero.powerstats.power}}</li>
+            <li>Speed: {{hero.powerstats.speed}}</li>
+            <li>Strength: {{hero.powerstats.strength}}</li>
+          </ul>
+        </div>
       </div>
     </div>
-
-    <div class="card-hero__item">
-      <div class="card-hero__img">
-        <img src="https://www.pngall.com/wp-content/uploads/11/Hero-PNG-File.png" alt="hero">
-        <button class="card-hero__select-btn">Select</button>
-      </div>
-      <div class="card-hero__description">
-        <ul>
-          <li>1. Name</li>
-          <li>2. Combat</li>
-          <li>3. Durability</li>
-          <li>4. Intelligence</li>
-          <li>5. Power</li>
-          <li>6. Speed</li>
-          <li>7. Strength</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card-hero__item">
-      <div class="card-hero__img">
-        <img src="https://www.pngall.com/wp-content/uploads/11/Hero-PNG-File.png" alt="hero">
-        <button class="card-hero__select-btn">Select</button>
-      </div>
-      <div class="card-hero__description">
-        <ul>
-          <li>1. Name</li>
-          <li>2. Combat</li>
-          <li>3. Durability</li>
-          <li>4. Intelligence</li>
-          <li>5. Power</li>
-          <li>6. Speed</li>
-          <li>7. Strength</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="card-hero__item">
-      <div class="card-hero__img">
-        <img src="https://www.pngall.com/wp-content/uploads/11/Hero-PNG-File.png" alt="hero">
-        <button class="card-hero__select-btn">Select</button>
-      </div>
-      <div class="card-hero__description">
-        <ul>
-          <li>Name</li>
-          <li>Combat</li>
-          <li>Durability</li>
-          <li>Intelligence</li>
-          <li>Power</li>
-          <li>Speed</li>
-          <li>Strength</li>
-        </ul>
-      </div>
-    </div>
-
   </div>
+
 </div>
