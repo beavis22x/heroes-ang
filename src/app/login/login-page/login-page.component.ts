@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '../../utils/services/auth.service';
+import { StorageService } from '../../utils/services/storage.service';
 
 import { RouteConfigs } from '../../utils/interfaces/routes.interfaces';
 
@@ -33,6 +33,7 @@ export class LoginPageComponent implements OnInit {
     private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
+    private storage: StorageService,
   ) {
   }
 
@@ -68,16 +69,14 @@ export class LoginPageComponent implements OnInit {
   }
 
   public submit(): void {
-    const userObj = JSON.parse(<string>localStorage.getItem(<string>this.form.value?.email));
+    const userObj = this.storage.getUser(this.form.value?.email);
 
     if (this.form.value?.email !== userObj?.email) {
       this.messageDanger = ALERT_ENUM.unsigned;
-
-      return;
     } else {
       this.auth.logIn();
       this.submitted = true;
-      this.router.navigate([this.routes.heroes.path]);
+      this.router.navigate([this.routes.heroesRoot.path]);
       this.form.reset();
     }
   }

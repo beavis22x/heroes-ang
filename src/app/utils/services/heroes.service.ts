@@ -20,7 +20,7 @@ export class HeroesService {
     if (!name.trim()) {
       return of([]);
     }
-    return this.http.get(`${API.name}/${name}`)
+    return this.http.get(`${API.byName}/${name}`)
       .pipe(map((response: {[key: string]: any }) => {
         return Object.keys(response.results)
           .map(key => ({
@@ -33,7 +33,7 @@ export class HeroesService {
   }
 
   getById(id: string): Observable<Hero> {
-    return this.http.get<Hero>(`${API.id}/${id}`)
+    return this.http.get<Hero>(`${API.byId}/${id}`)
       .pipe(map((hero: Hero) => {
         return {
           ...hero,
