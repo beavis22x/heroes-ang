@@ -11,6 +11,7 @@ import { Hero } from '../../utils/interfaces/hero.interface';
 import { SEARCH_FIELD_ENUM } from '../../utils/enum/form-field.enum';
 
 import { searchPanelRegEx } from '../../utils/RegExp/login.regExp';
+import { alphabetArray } from '../../utils/const/validators.const';
 
 @Component({
   selector: 'app-heroes',
@@ -25,6 +26,8 @@ export class HeroesSelectPageComponent implements OnInit, OnDestroy {
   public results = 0;
   public searches = 'a';
   public recentView = false;
+  public alphabet: string[] = alphabetArray;
+  public alphabetView = false;
   public searchList: string[] = [];
   public searchFieldEnum = SEARCH_FIELD_ENUM;
 
@@ -42,7 +45,7 @@ export class HeroesSelectPageComponent implements OnInit, OnDestroy {
 
   public formInit(): void {
     this.form = new FormGroup({
-      search_panel: new FormControl('a', [
+      search_panel: new FormControl('', [
         Validators.pattern(searchPanelRegEx),
       ])
     })
@@ -82,7 +85,17 @@ export class HeroesSelectPageComponent implements OnInit, OnDestroy {
     this.recentView = !this.recentView;
   }
 
-  selectHero($event: MouseEvent, id: string) {
+  public alphabetToggle(): void {
+    this.alphabetView = !this.alphabetView;
+  }
+
+  public selectHero($event: MouseEvent, id: string): void {
     ($event.target as HTMLButtonElement).disabled = true;
+  }
+
+  public selectChar(char: string): void {
+    this.form.patchValue({
+      search_panel: char
+    })
   }
 }
