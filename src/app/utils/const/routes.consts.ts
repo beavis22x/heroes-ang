@@ -20,9 +20,34 @@ const heroes: RouteConfig = {
   path: 'heroes',
 }
 
+const userInfo: RouteConfig = {
+  name: 'user-info',
+  path: 'user-info-page',
+  fullpath: '/user-info-page'
+}
+
+const userHeroList: RouteConfig = {
+  name: 'user-hero-list',
+  path: 'hero-list',
+}
+
+const userHistory: RouteConfig = {
+  name: 'user-history',
+  path: 'history'
+}
+
+const userPowerUps: RouteConfig = {
+  name: 'user-power-ups',
+  path: 'power-ups'
+}
+
 export const ROUTE_CONFIGS: RouteConfigs = {
   root,
   login,
   registration,
   heroes,
+  userInfo,
+  userHeroList,
+  userHistory,
+  userPowerUps,
 }

@@ -1,0 +1,13 @@
+.user-info__content {
+  display: grid;
+  grid-template: 1fr/ 0.2fr 0.8fr;
+  grid-column-gap: 1rem;
+}
+
+.user-info__sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info__page .container {
+}

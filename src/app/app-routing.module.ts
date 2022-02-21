@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 
@@ -20,15 +20,17 @@ const routes: Routes = [
       {
         path: ROUTE_CONFIGS.registration.path,
         loadChildren: () => import('./registration/registration.module').then(mod => mod.RegistrationModule)
+      },
+      {
+        path: ROUTE_CONFIGS.userInfo.path,
+        loadChildren: () => import('./user-info/user-info.module').then(mod => mod.UserInfoModule)
       }
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {
-    preloadingStrategy: PreloadAllModules
-  })],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

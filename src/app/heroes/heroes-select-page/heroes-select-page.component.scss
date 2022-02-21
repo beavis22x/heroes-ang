@@ -1,6 +1,6 @@
 .container-select{
-  font-size: 1.2rem;
   display: grid;
+  font-size: 1.2rem;
   grid-template-columns: 0.05fr 1fr;
   grid-column-gap: 5px ;
 }
@@ -53,17 +53,17 @@ ul {
   background-color: #2ec4b6;
   cursor: pointer;
 
-    &[disabled] {
-      background-color: #fff;
-    }
+  &[disabled] {
+    background-color: #fff;
+  }
 }
 
 .form-search__recent {
   cursor: pointer;
 
-    &:hover {
-        opacity: 0.6;
-      }
+  &:hover {
+      opacity: 0.6;
+    }
 }
 
 .alphabet-search {

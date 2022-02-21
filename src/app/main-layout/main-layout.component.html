@@ -15,10 +15,14 @@
          class="header_menu">
       <ul>
         <li>
-          <a>Home</a>
+          <a [routerLink]="[routes.heroes.path]">
+            Home
+          </a>
         </li>
         <li>
-          <a>User Info</a>
+          <a [routerLink]="[routes.userInfo.fullpath ,routes.userHeroList.path]">
+            User Info
+          </a>
         </li>
         <li>
           <a (click)="logout()">Выйти</a>
