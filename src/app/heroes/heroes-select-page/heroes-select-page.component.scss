@@ -1,6 +1,6 @@
 .container-select{
-  font-size: 1.2rem;
   display: grid;
+  font-size: 1.2rem;
   grid-template-columns: 0.05fr 1fr;
   grid-column-gap: 5px ;
 }
@@ -33,7 +33,7 @@ ul {
   align-items: center;
   justify-items: center;
   border-radius: 20%;
-  border: 2px solid #4f7196;
+  border: 3px solid var(--border-color);
 }
 
 .card-hero__img {
@@ -53,17 +53,17 @@ ul {
   background-color: #2ec4b6;
   cursor: pointer;
 
-    &[disabled] {
-      background-color: #fff;
-    }
+  &[disabled] {
+    background-color: #fff;
+  }
 }
 
 .form-search__recent {
   cursor: pointer;
 
-    &:hover {
-        opacity: 0.6;
-      }
+  &:hover {
+      opacity: 0.6;
+    }
 }
 
 .alphabet-search {
@@ -76,8 +76,8 @@ ul {
   width: 34px;
   height: 34px;
   margin: 10px 0;
-  font-weight: bold;
-  color: #f4f4f4;
+  font-weight: bolder;
+  color: var(--border-color);
   border: solid 3px ;
   border-radius: 50%;
   background-color: var(--primary-color);

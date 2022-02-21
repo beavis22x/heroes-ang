@@ -9,7 +9,7 @@ export enum REGISTER_FIELDS_ENUM {
   login = 'login'
 }
 
-export enum SEARCH_FIELD_ENUM {
+export enum SEARCH_FIELDS_ENUM {
   search = 'search_panel'
 }
 

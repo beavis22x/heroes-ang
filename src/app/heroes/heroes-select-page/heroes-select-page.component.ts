@@ -1,17 +1,18 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
-
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { HeroesService } from '../../utils/services/heroes.service';
 
 import { Hero } from '../../utils/interfaces/hero.interface';
 
-import { SEARCH_FIELD_ENUM } from '../../utils/enum/form-field.enum';
+import { SEARCH_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
+
+import { alphabetArray } from '../../utils/const/validators.const';
+import { debounceMs } from '../../utils/const/unsort.consts';
 
 import { searchPanelRegEx } from '../../utils/RegExp/login.regExp';
-import { alphabetArray } from '../../utils/const/validators.const';
 
 @Component({
   selector: 'app-heroes',
@@ -29,7 +30,7 @@ export class HeroesSelectPageComponent implements OnInit, OnDestroy {
   public alphabet: string[] = alphabetArray;
   public alphabetView = false;
   public searchList: string[] = [];
-  public searchFieldEnum = SEARCH_FIELD_ENUM;
+  public searchFieldEnum = SEARCH_FIELDS_ENUM;
 
   constructor(
     private heroService: HeroesService,
@@ -39,8 +40,8 @@ export class HeroesSelectPageComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.formInit();
-    this.onChanges();
-    this.fetchHeroes();
+    this.searchPanelListener();
+    this.getHeroes();
   }
 
   public formInit(): void {
@@ -51,20 +52,20 @@ export class HeroesSelectPageComponent implements OnInit, OnDestroy {
     })
   }
 
-  public onChanges(): void {
-    this.subscriptions.add(this.form.get('search_panel')?.valueChanges
+  public searchPanelListener(): void {
+    this.subscriptions.add(this.form.get(this.searchFieldEnum.search)?.valueChanges
       .pipe(
-        debounceTime(400),
+        debounceTime(debounceMs),
         distinctUntilChanged()
       )
-      .subscribe(term => {
+      .subscribe((term: string) => {
         this.searches = term;
         this.searchList.push(term);
-        this.fetchHeroes();
+        this.getHeroes();
       }))
   }
 
-  public fetchHeroes(): void {
+  public getHeroes(): void {
     this.subscriptions.add(this.heroService.getByName(this.searches).subscribe((heroes: Hero[]) => {
       this.results = heroes.length;
       this.heroes = heroes.slice(0, 20);

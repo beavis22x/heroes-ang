@@ -79,7 +79,7 @@ export class RegistrationComponent implements OnInit {
     }
 
     this.auth.signUp(user);
-    this.router.navigate([this.routes.heroes.path]);
+    this.router.navigate([this.routes.heroesRoot.path]);
     this.form.reset();
   }
 }
