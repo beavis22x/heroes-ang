@@ -2,17 +2,20 @@
   <div class="user-info__content">
 
     <div class="user-info__sidebar">
-      <button class="user-info__sidebar btn">
+      <button class="user-info__sidebar btn"
+              routerLinkActive="active">
         <a [routerLink]="[routes.userInfo.fullpath ,routes.userHeroList.path]">
           Heroes List
         </a>
       </button>
-      <button class="user-info__sidebar btn">
+      <button class="user-info__sidebar btn"
+              routerLinkActive="active">
         <a [routerLink]="[routes.userInfo.fullpath ,routes.userHistory.path]">
           History
         </a>
       </button>
-      <button class="user-info__sidebar btn">
+      <button class="user-info__sidebar btn"
+              routerLinkActive="active">
         <a [routerLink]="[routes.userInfo.fullpath ,routes.userPowerUps.path]">
           Power Ups
         </a>

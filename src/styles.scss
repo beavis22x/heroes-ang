@@ -55,6 +55,11 @@ img {
   background-color: var(--primary-color);
 }
 
+.active {
+  font-weight: bolder;
+  opacity: 0.6;
+}
+
 ul,
 .app_logo {
   display: flex;
