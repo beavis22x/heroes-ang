@@ -37,7 +37,7 @@ export class UserHeroListComponent implements OnInit, OnDestroy {
   }
 
   public getSelectedHeroes(): void {
-    this.subscriptions.add(this.selectedHeroesService.selectedHeroesSubject.subscribe((arr) => {
+    this.subscriptions.add(this.selectedHeroesService.selectedHeroesSubject.subscribe((arr: string[]) => {
       this.selectedHeroesId = arr;
     }))
     this.selectedHeroesId.map((id: string) => {
