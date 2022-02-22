@@ -50,7 +50,8 @@
           <div class="card-hero__img">
             <img [src]="hero.image" alt="hero">
             <button class="card-hero__select-btn"
-                    (click)="selectHero($event, hero.id)">
+                    (click)="selectHero($event, hero.id)"
+                    [disabled]="isSelected(hero.id)">
               Select
             </button>
           </div>

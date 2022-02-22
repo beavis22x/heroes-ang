@@ -41,6 +41,11 @@ const userPowerUps: RouteConfig = {
   path: 'power-ups'
 }
 
+const userHeroInfo: RouteConfig = {
+  name: 'user-hero-info',
+  path: 'hero-info'
+}
+
 export const ROUTE_CONFIGS: RouteConfigs = {
   root,
   login,
@@ -50,4 +55,5 @@ export const ROUTE_CONFIGS: RouteConfigs = {
   userHeroList,
   userHistory,
   userPowerUps,
+  userHeroInfo,
 }

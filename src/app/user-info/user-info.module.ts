@@ -7,13 +7,15 @@ import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { UserHeroListComponent } from './user-hero-list/user-hero-list.component';
 import { UserHistoryComponent } from './user-history/user-history.component';
 import { UserPowerUpsComponent } from './user-power-ups/user-power-ups.component';
+import { UserHeroInfoComponent } from './user-hero-info/user-hero-info.component';
 
 @NgModule({
   declarations: [
     UserLayoutComponent,
     UserHeroListComponent,
     UserHistoryComponent,
-    UserPowerUpsComponent
+    UserPowerUpsComponent,
+    UserHeroInfoComponent
   ],
   imports: [
     CommonModule,

@@ -16,12 +16,12 @@ export class HeroesService {
   constructor(private http: HttpClient) {
   }
 
-  getByName(name: string): Observable<Hero[]> {
+  public getByName(name: string): Observable<Hero[]> {
     if (!name.trim()) {
       return of([]);
     }
     return this.http.get(`${API.name}/${name}`)
-      .pipe(map((response: {[key: string]: any }) => {
+      .pipe(map((response: { [key: string]: any }) => {
         return Object.keys(response.results)
           .map(key => ({
             id: response.results[key].id,
@@ -32,13 +32,15 @@ export class HeroesService {
       }))
   }
 
-  getById(id: string): Observable<Hero> {
+  public getById(id: string): Observable<Hero> {
     return this.http.get<Hero>(`${API.id}/${id}`)
       .pipe(map((hero: Hero) => {
         return {
-          ...hero,
-          id,
-        }
+          id: hero.id,
+          name: hero.name,
+          powerstats: hero.powerstats,
+          image: hero.image,
+        };
       }))
   }
 }

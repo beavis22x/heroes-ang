@@ -1,7 +1,9 @@
 export interface Hero {
   name: string;
   powerstats: Powerstats;
-  image: string;
+  image: {
+    url: string
+  };
   id: string;
 }
 

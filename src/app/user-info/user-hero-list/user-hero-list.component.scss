@@ -1,0 +1,49 @@
+.card-hero__item {
+  display: grid;
+  grid-template-columns: 30% 30% 30%;
+  margin: 20px 20px 0 0;
+  justify-content: space-between;
+  align-items: center;
+  justify-items: center;
+  border: 2px solid #4f7196;
+}
+
+.card-hero__img {
+  display: flex;
+  height: 280px;
+  width: 210px;
+  padding: 10px 10px 10px 15px;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn {
+  width: 50%;
+  margin: 0 auto;
+  font-weight: bold;
+  cursor: pointer;
+
+  &[disabled] {
+    background-color: #fff;
+  }
+}
+
+.card-hero__delete {
+  background-color: var(--danger-color);
+}
+
+.card-hero__select {
+  background-color: var(--success-color);
+}
+
+.card-hero__buttons{
+  display: flex;
+  width: 100%;
+  height: 80%;
+  flex-direction: column;
+  justify-content: space-around;
+}
