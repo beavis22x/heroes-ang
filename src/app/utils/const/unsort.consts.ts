@@ -1,1 +1,1 @@
-export const debounceMs = 400;
+export const SEARCH_DELAY = 400;

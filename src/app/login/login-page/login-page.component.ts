@@ -9,7 +9,7 @@ import { RouteConfigs } from '../../utils/interfaces/routes.interfaces';
 
 import { ALERT_ENUM, LOGIN_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
 
-import { emptyString, minLengthPass } from '../../utils/const/validators.const'
+import { emptyString, LOGIN_AGAIN, minLengthPass } from '../../utils/const/validators.const'
 import { ROUTE_CONFIGS } from '../../utils/const/routes.consts';
 
 import { emailRegEx, passwordRegEx } from '../../utils/RegExp/login.regExp';
@@ -48,7 +48,7 @@ export class LoginPageComponent implements OnInit {
 
   public validationInit(): void {
     this.route.queryParams.subscribe((params: Params) => {
-      if (params['loginAgain']) {
+      if (params[LOGIN_AGAIN]) {
         this.messageInfo = ALERT_ENUM.loginAgain;
       }
     })
@@ -69,9 +69,9 @@ export class LoginPageComponent implements OnInit {
   }
 
   public submit(): void {
-    const userObj = this.storage.getUser(this.form.value?.email);
+    const user = this.storage.getUserByEmail(this.form.value?.email);
 
-    if (this.form.value?.email !== userObj?.email) {
+    if (this.form.value?.email !== user?.email) {
       this.messageDanger = ALERT_ENUM.unsigned;
     } else {
       this.auth.logIn();

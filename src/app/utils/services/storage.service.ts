@@ -10,7 +10,7 @@ import { AUTH_ENUM } from '../enum/auth.enum';
 export class StorageService {
   public authToken = AUTH_ENUM;
 
-  public getUser(key: boolean | string): User {
+  public getUserByEmail(key: boolean | string): User {
     return JSON.parse(<string>localStorage.getItem(<string>key));
   }
 

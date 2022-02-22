@@ -10,7 +10,7 @@ import { Hero } from '../../utils/interfaces/hero.interface';
 import { SEARCH_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
 
 import { alphabetArray } from '../../utils/const/validators.const';
-import { debounceMs } from '../../utils/const/unsort.consts';
+import { SEARCH_DELAY } from '../../utils/const/unsort.consts';
 
 import { searchPanelRegEx } from '../../utils/RegExp/login.regExp';
 
@@ -55,7 +55,7 @@ export class HeroesSelectPageComponent implements OnInit, OnDestroy {
   public searchPanelListener(): void {
     this.subscriptions.add(this.form.get(this.searchFieldEnum.search)?.valueChanges
       .pipe(
-        debounceTime(debounceMs),
+        debounceTime(SEARCH_DELAY),
         distinctUntilChanged()
       )
       .subscribe((term: string) => {
