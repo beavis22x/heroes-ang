@@ -1,34 +1,37 @@
 import { Injectable } from '@angular/core';
 
-import { User } from '../interfaces/form.interfaces';
+import { StorageService } from './storage.service';
 
-import { AUTH_ENUM } from '../enum/auth.enum';
+import { User } from '../interfaces/form.interfaces';
+import { generateToken } from '../functions/common.functions';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  public authToken = AUTH_ENUM;
 
-  constructor() { }
+  constructor(private storage: StorageService) { }
 
   get token(): string | null {
-    const expDate = new Date(<string>localStorage.getItem(this.authToken.token_expire));
+    const expDate = new Date(<string>this.storage.getTokenExpire());
 
     if(new Date() > expDate) {
       this.logOut();
 
       return null;
     }
-    return localStorage.getItem(this.authToken.token);
+    return this.storage.getToken();
   }
 
-  public logIn(user: User): void {
-    if(user.email === localStorage.getItem(<string>user.email) && this.token) {
+  public logIn(): void {
+    if(!this.token) {
       this.setToken();
-    } else {
-      return
     }
+  }
+
+  public signUp(user: User): void {
+    this.storage.setUser(user);
+    this.setToken();
   }
 
   public logOut(): void {
@@ -36,19 +39,19 @@ export class AuthService {
   }
 
   public isAuthenticated(): boolean {
-    return Boolean(this.token);
+    return Boolean(<string>this.token);
   }
 
   private setToken(flag?: boolean): void {
     if(!flag) {
       const sixHour = 3600 * 6 * 1000;
       const expiresDate = new Date(new Date().getTime() + sixHour);
-      const token = btoa(Math.random().toString()).substr(10, 5);
+      const token = generateToken();
 
-      localStorage.setItem(this.authToken.token, token);
-      localStorage.setItem(this.authToken.token_expire, expiresDate.toString());
+      this.storage.setToken(token);
+      this.storage.setTokenExpire(expiresDate);
     } else {
-      localStorage.clear();
+      this.storage.clearStorage();
     }
   }
 }

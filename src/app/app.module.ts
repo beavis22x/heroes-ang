@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { LoginModule } from './login/login.module';
 
 import { AppComponent } from './app.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
@@ -19,7 +18,7 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    LoginModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,29 +1,27 @@
 <header>
   <nav class="navbar">
-
-    <div class="app_logo">
-      <div class="app_logo__img">
-        <img src="https://cdn.imgbin.com/18/17/14/hero-image-hero-logo-cartoon-pwTkCwKJ.jpg" alt="лого сайта"/>
+    <a href="#">
+      <div class="app_logo">
+        <div class="app_logo__img">
+          <img src="https://cdn.imgbin.com/18/17/14/hero-image-hero-logo-cartoon-pwTkCwKJ.jpg" alt="лого сайта"/>
+        </div>
+        <h1>
+          Heroes App
+        </h1>
       </div>
-      <h1>
-        <a>Heroes App</a>
-      </h1>
-    </div>
+    </a>
 
-    <div class="header_menu">
+    <div *ngIf="auth.isAuthenticated()"
+         class="header_menu">
       <ul>
         <li>
-          <a>
-            Home
-          </a>
+          <a>Home</a>
         </li>
         <li>
-          <a>
-            User Info
-          </a>
+          <a>User Info</a>
         </li>
         <li>
-          <a>Выйти</a>
+          <a (click)="logout()">Выйти</a>
         </li>
         <li>
           <a>

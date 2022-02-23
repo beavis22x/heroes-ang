@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 
@@ -14,7 +14,7 @@ const routes: Routes = [
         loadChildren: () => import('./login/login.module').then(mod => mod.LoginModule)
       },
       {
-        path: ROUTE_CONFIGS.heroes.path,
+        path: ROUTE_CONFIGS.heroesRoot.path,
         loadChildren: () => import('./heroes/heroes.module').then(mod => mod.HeroesModule)
       },
       {
@@ -26,7 +26,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
