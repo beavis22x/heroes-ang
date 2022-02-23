@@ -9,7 +9,7 @@ import { RouteConfigs } from '../../utils/interfaces/routes.interfaces';
 
 import { ALERT_ENUM, LOGIN_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
 
-import { emptyString, LOGIN_AGAIN, minLengthPass } from '../../utils/const/validators.const'
+import { EMPTY_STRING, LOGIN_AGAIN, MIN_LENGTH_LOGIN } from '../../utils/const/validators.const'
 import { ROUTE_CONFIGS } from '../../utils/const/routes.consts';
 
 import { emailRegEx, passwordRegEx } from '../../utils/RegExp/login.regExp';
@@ -25,8 +25,8 @@ export class LoginPageComponent implements OnInit {
   public form!: FormGroup;
   public fieldFormEnum = LOGIN_FIELDS_ENUM;
   public routes: RouteConfigs = ROUTE_CONFIGS;
-  public messageInfo = emptyString;
-  public messageDanger = emptyString;
+  public messageInfo = EMPTY_STRING;
+  public messageDanger = EMPTY_STRING;
   private submitted: boolean = false;
 
   constructor(
@@ -38,7 +38,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   get isDisabled(): boolean {
-    return this.form.invalid || this.submitted
+    return this.form.invalid || this.submitted;
   }
 
   public ngOnInit(): void {
@@ -62,7 +62,7 @@ export class LoginPageComponent implements OnInit {
       ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(minLengthPass),
+        Validators.minLength(MIN_LENGTH_LOGIN),
         Validators.pattern(passwordRegEx),
       ]),
     })
