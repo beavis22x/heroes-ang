@@ -33,7 +33,7 @@ ul {
   align-items: center;
   justify-items: center;
   border-radius: 20%;
-  border: 2px solid #4f7196;
+  border: 3px solid var(--border-color);
 }
 
 .card-hero__img {
@@ -76,8 +76,8 @@ ul {
   width: 34px;
   height: 34px;
   margin: 10px 0;
-  font-weight: bold;
-  color: #f4f4f4;
+  font-weight: bolder;
+  color: var(--border-color);
   border: solid 3px ;
   border-radius: 50%;
   background-color: var(--primary-color);

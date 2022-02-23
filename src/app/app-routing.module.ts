@@ -14,7 +14,7 @@ const routes: Routes = [
         loadChildren: () => import('./login/login.module').then(mod => mod.LoginModule)
       },
       {
-        path: ROUTE_CONFIGS.heroes.path,
+        path: ROUTE_CONFIGS.heroesRoot.path,
         loadChildren: () => import('./heroes/heroes.module').then(mod => mod.HeroesModule)
       },
       {

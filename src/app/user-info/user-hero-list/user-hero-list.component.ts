@@ -61,7 +61,7 @@ export class UserHeroListComponent implements OnInit, OnDestroy {
   }
 
   public addHero(): void {
-    this.router.navigate([this.routes.heroes.path]);
+    this.router.navigate([this.routes.heroesRoot.path]);
   }
 
   public ngOnDestroy(): void {

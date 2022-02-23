@@ -8,10 +8,10 @@ import { UserHistoryComponent } from './user-history/user-history.component';
 import { UserHeroInfoComponent } from './user-hero-info/user-hero-info.component';
 
 import { ROUTE_CONFIGS } from '../utils/const/routes.consts';
-import { emptyString } from '../utils/const/validators.const';
+import { EMPTY_STRING } from '../utils/const/validators.const';
 
 const routes: Routes = [
-  {path: emptyString, component: UserLayoutComponent, children: [
+  {path: EMPTY_STRING, component: UserLayoutComponent, children: [
       {path: ROUTE_CONFIGS.root.path, redirectTo: ROUTE_CONFIGS.userHeroList.path, pathMatch: 'full'},
       {path: ROUTE_CONFIGS.userHeroList.path, component: UserHeroListComponent},
       {path: ROUTE_CONFIGS.userHistory.path, component: UserHistoryComponent},
