@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { filter } from 'rxjs';
+
 import { AuthService } from '../../utils/services/auth.service';
 import { StorageService } from '../../utils/services/storage.service';
 
@@ -9,7 +11,7 @@ import { RouteConfigs } from '../../utils/interfaces/routes.interfaces';
 
 import { ALERT_ENUM, LOGIN_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
 
-import { EMPTY_STRING, LOGIN_AGAIN, MIN_LENGTH_LOGIN } from '../../utils/const/validators.const'
+import { EMPTY_STRING, LOGIN_AGAIN, MIN_LENGTH_LOGIN } from '../../utils/const/validators.const';
 import { ROUTE_CONFIGS } from '../../utils/const/routes.consts';
 
 import { emailRegEx, passwordRegEx } from '../../utils/RegExp/login.regExp';
@@ -47,11 +49,11 @@ export class LoginPageComponent implements OnInit {
   }
 
   public validationInit(): void {
-    this.route.queryParams.subscribe((params: Params) => {
-      if (params[LOGIN_AGAIN]) {
+    this.route.queryParams.pipe(
+      filter((params: Params) => Boolean(params[LOGIN_AGAIN]))
+    ).subscribe(() => {
         this.messageInfo = ALERT_ENUM.loginAgain;
-      }
-    })
+      })
   }
 
   public formInit(): void {
@@ -71,13 +73,13 @@ export class LoginPageComponent implements OnInit {
   public submit(): void {
     const user = this.storage.getUserByEmail(this.form.value?.email);
 
-    if (this.form.value?.email !== user?.email) {
-      this.messageDanger = ALERT_ENUM.unsigned;
-    } else {
+    if (this.form.value?.email === user?.email) {
       this.auth.logIn();
       this.submitted = true;
       this.router.navigate([this.routes.heroesRoot.path]);
       this.form.reset();
+    } else {
+      this.messageDanger = ALERT_ENUM.unsigned;
     }
   }
 
@@ -85,7 +87,7 @@ export class LoginPageComponent implements OnInit {
     return Boolean(this.form.get(fieldStr)?.touched && this.form.get(fieldStr)?.invalid);
   }
 
-  public register(): void {
-    this.router.navigate([this.routes.registration.path])
+  public registration(): void {
+    this.router.navigate([this.routes.registration.path]);
   }
 }

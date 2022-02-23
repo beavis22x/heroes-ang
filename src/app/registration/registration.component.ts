@@ -67,7 +67,7 @@ export class RegistrationComponent implements OnInit {
     return Boolean(this.form.get(fieldStr)?.touched && this.form.get(fieldStr)?.invalid);
   }
 
-  public register(): void{
+  public registration(): void{
     if (this.form?.invalid) {
       return;
     }

@@ -8,3 +8,9 @@ export interface Hero {
 export interface Powerstats {
   [key: string]: string;
 }
+
+export interface serverResponse {
+  response: string;
+  "results-for": string;
+  results: [];
+}

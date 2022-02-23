@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 
 import { User } from '../interfaces/form.interfaces';
+import { generateToken } from '../functions/common.functions';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,7 @@ export class AuthService {
     if(!flag) {
       const sixHour = 3600 * 6 * 1000;
       const expiresDate = new Date(new Date().getTime() + sixHour);
-      const token = btoa(Math.random().toString()).substr(10, 5);
+      const token = generateToken();
 
       this.storage.setToken(token);
       this.storage.setTokenExpire(expiresDate);

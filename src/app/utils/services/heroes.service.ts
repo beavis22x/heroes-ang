@@ -20,16 +20,18 @@ export class HeroesService {
     if (!name.trim()) {
       return of([]);
     }
+
     return this.http.get(`${API.byName}/${name}`)
-      .pipe(map((response: {[key: string]: any }) => {
-        return Object.keys(response.results)
-          .map(key => ({
+      .pipe(
+        map((response: { [key: string]: any }) => {
+          return Object.keys(response?.results).map((key: string) => ({
             id: response.results[key].id,
             name: response.results[key].name,
             powerstats: response.results[key].powerstats,
             image: response.results[key].image.url,
           }))
-      }))
+        })
+      )
   }
 
   getById(id: string): Observable<Hero> {
