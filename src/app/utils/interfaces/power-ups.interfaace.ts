@@ -4,6 +4,7 @@ export interface PowerUps {
   description: string;
   bonus: number;
   remainAmount: number;
+  active: boolean;
 }
 
 export interface PowerUpsArray {

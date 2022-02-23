@@ -1,0 +1,26 @@
+.power-ups__item {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  border:  solid 2px var(--primary-color);
+  border-radius: 20px;
+  margin: 0 0 10px;
+  justify-items: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.power-ups__description {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  justify-content: space-between;
+}
+
+.power-ups__image {
+  width: 210px;
+  height: 220px;
+}
+
+.power-ups__item, active{
+  opacity: 0.5;
+}
