@@ -1,5 +1,6 @@
 :root {
   --primary-color: #219ebc;
+  --border-color: #ceff4d;
   --dark-color: #333333;
   --light-color: #f4f4f4;
   --danger-color: #ef233c;
@@ -112,6 +113,8 @@ a {
 
   .validation {
     color: var(--danger-color);
+    display: flex;
+    flex-direction: column;
   }
 }
 

@@ -15,9 +15,14 @@ const registration: RouteConfig = {
   path: 'registration',
 }
 
-const heroes: RouteConfig = {
-  name: 'heroes',
-  path: 'heroes',
+const heroesRoot: RouteConfig = {
+  name: 'heroes-root',
+  path: 'heroes-selection-page',
+}
+
+const userRoot: RouteConfig = {
+  name: 'user-root',
+  path: 'user-info-page',
 }
 
 const userInfo: RouteConfig = {
@@ -50,7 +55,8 @@ export const ROUTE_CONFIGS: RouteConfigs = {
   root,
   login,
   registration,
-  heroes,
+  heroesRoot,
+  userRoot,
   userInfo,
   userHeroList,
   userHistory,

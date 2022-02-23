@@ -19,7 +19,7 @@
       </small>
       <small *ngIf="form.get(fieldFormEnum.email)?.errors?.pattern">
         Email must have at least 3 characters before the @, @ ,
-        3-5 english letters after it, and must end in .com/.net/.org/.co/.us <br>
+        3-5 english letters after it, and must end in .com/.net/.org/.co/.us
         Example: new.email.user@dd.co
       </small>
     </div>
@@ -35,7 +35,7 @@
         Required field
       </small>
       <small *ngIf="form.get(fieldFormEnum.password)?.errors?.minlength">
-        Password length minimum {{form.get(fieldFormEnum.password)?.errors?.minlength?.requiredLength}} characters <br>
+        Password length minimum {{form.get(fieldFormEnum.password)?.errors?.minlength?.requiredLength}} characters
       </small>
       <small *ngIf="form.get(fieldFormEnum.password)?.errors?.pattern">
         Password must include number, small and big english letters
@@ -52,7 +52,7 @@
     </button>
     <button class="btn"
             type="button"
-            (click)="register()">
+            (click)="registration()">
       Sign Up
     </button>
   </div>
