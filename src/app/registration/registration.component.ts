@@ -11,7 +11,7 @@ import { RouteConfigs } from '../utils/interfaces/routes.interfaces';
 import { REGISTER_FIELDS_ENUM } from '../utils/enum/form-field.enum';
 
 import { ROUTE_CONFIGS } from '../utils/const/routes.consts';
-import { minLengthlogin, minLengthPass } from '../utils/const/validators.const';
+import { MIN_LENGTH_LOGIN, MIN_LENGTH_PATH } from '../utils/const/validators.const';
 
 import { emailRegEx, loginRegEx, passwordRegEx } from '../utils/RegExp/login.regExp';
 
@@ -47,7 +47,7 @@ export class RegistrationComponent implements OnInit {
     this.form = new FormGroup({
       login: new FormControl('', [
           Validators.required,
-          Validators.minLength(minLengthlogin),
+          Validators.minLength(MIN_LENGTH_LOGIN),
           Validators.pattern(loginRegEx),
         ]
       ),
@@ -57,7 +57,7 @@ export class RegistrationComponent implements OnInit {
       ]),
       password: new FormControl('', [
         Validators.required,
-        Validators.minLength(minLengthPass),
+        Validators.minLength(MIN_LENGTH_PATH),
         Validators.pattern(passwordRegEx),
       ]),
     })
