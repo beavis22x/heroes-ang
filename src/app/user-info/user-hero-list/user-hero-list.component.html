@@ -1,4 +1,11 @@
-<h1>Hero List</h1>
+<div class="hero-list__header">
+  <h1>Hero List</h1>
+  <button *ngIf="selectedHeroesId.length"
+          class="battle-arena btn"
+          (click)="routeInBattle()">
+    Battle Arena
+  </button>
+</div>
 <div class="hero-list container">
 
   <div class="hero-list__amount">

@@ -72,6 +72,10 @@ export class UserHeroListComponent implements OnInit, OnDestroy {
     })
   }
 
+  public routeInBattle(): void {
+      this.router.navigate([this.routes.battlePage.path])
+  }
+
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }

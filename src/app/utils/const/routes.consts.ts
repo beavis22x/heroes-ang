@@ -51,6 +51,11 @@ const userHeroInfo: RouteConfig = {
   path: 'hero-info'
 }
 
+const battlePage: RouteConfig = {
+  name: 'battle-page',
+  path: 'battle-page'
+}
+
 export const ROUTE_CONFIGS: RouteConfigs = {
   root,
   login,
@@ -62,4 +67,5 @@ export const ROUTE_CONFIGS: RouteConfigs = {
   userHistory,
   userPowerUps,
   userHeroInfo,
+  battlePage,
 }
