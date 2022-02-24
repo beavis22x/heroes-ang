@@ -24,6 +24,10 @@ const routes: Routes = [
       {
         path: ROUTE_CONFIGS.userInfo.path,
         loadChildren: () => import('./user-info/user-info.module').then(mod => mod.UserInfoModule)
+      },
+      {
+        path: ROUTE_CONFIGS.battlePage.path,
+        loadChildren: () => import('./battle-page/battle-page.module').then(mod => mod.BattlePageModule)
       }
     ]
   }

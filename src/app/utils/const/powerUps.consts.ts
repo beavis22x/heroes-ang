@@ -8,7 +8,8 @@ const captainAmericaShield: PowerUps = {
   description: 'durability +10',
   bonus: 10,
   remainAmount: MAX_AMOUNT_USE_UPS,
-  active: false
+  active: false,
+  id: 1
 }
 
 const nanoArmor: PowerUps = {
@@ -17,7 +18,8 @@ const nanoArmor: PowerUps = {
   description: 'combat +10',
   bonus: 10,
   remainAmount: MAX_AMOUNT_USE_UPS,
-  active: false
+  active: false,
+  id: 2
 }
 
 const mjolnir: PowerUps = {
@@ -26,7 +28,8 @@ const mjolnir: PowerUps = {
   description: 'power +10',
   bonus: 10,
   remainAmount: MAX_AMOUNT_USE_UPS,
-  active: false
+  active: false,
+  id: 3
 }
 
 const cloak: PowerUps = {
@@ -35,7 +38,8 @@ const cloak: PowerUps = {
   description: 'intelligence +10',
   bonus: 10,
   remainAmount: MAX_AMOUNT_USE_UPS,
-  active: false
+  active: false,
+  id: 4
 }
 
 const ring: PowerUps = {
@@ -44,7 +48,8 @@ const ring: PowerUps = {
   description: 'strength +10',
   bonus: 10,
   remainAmount: MAX_AMOUNT_USE_UPS,
-  active: false
+  active: false,
+  id: 5
 }
 
 const flashBoots: PowerUps = {
@@ -53,7 +58,8 @@ const flashBoots: PowerUps = {
   description: 'speed +10',
   bonus: 10,
   remainAmount: MAX_AMOUNT_USE_UPS,
-  active: false
+  active: false,
+  id: 6
 }
 
 export const POWER_UPS: PowerUps[] = [

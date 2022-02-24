@@ -1,0 +1,132 @@
+.modal__container {
+  position: fixed;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: flex-start;
+  opacity: 0;
+  pointer-events: none;
+  background-color: rgba(142, 202, 230, 0.3);
+  transition: opacity 0.4s;
+}
+
+.show {
+  opacity:1;
+  pointer-events: auto;
+}
+
+.modal {
+  display: grid;
+  width: 300px;
+  background-color: #BBDEF0;
+  justify-items: center;
+}
+
+.modal__result {
+  padding: 20px;
+}
+
+.modal.btn {
+  margin: 10px;
+  background-color: var(--primary-color);
+  width: 50%;
+}
+
+.battle__content {
+display: grid;
+grid-template-columns: 25% 50% 25%;
+column-gap: 5px;
+}
+
+.battle__hero-description>ul, .battle__opponent-description>ul {
+display: flex;
+flex-direction: column;
+align-items: center;
+}
+
+.battle__hero-img>img, .battle__opponent-img>img {
+max-height: 250px;
+padding: 10px;
+}
+
+.battle__content>div {
+margin: 10px 0 0 0;
+padding: 5px;
+border: 3px solid var(--border-color);
+}
+
+.battle__control{
+display: flex;
+flex-direction: column;
+}
+
+.battle__field {
+display: grid;
+grid-template: repeat(4, 1fr)/ repeat(3, 1fr);
+align-items: center;
+justify-items: center;
+flex: 2;
+}
+
+.battle__hero-name {
+grid-column-start: 1;
+grid-row-start: 2;
+}
+
+.battle__vs{
+grid-column-start: 2;
+grid-row-start: 3;
+}
+.battle__start {
+grid-column-start: 2;
+grid-row-start: 4;
+}
+
+.battle__opponent-name {
+grid-column-start: 3;
+grid-row-start: 2;
+}
+
+.battle__power-ups {
+display: flex;
+flex-direction: column;
+justify-content: center;
+flex:2;
+}
+
+select {
+display: inline-block;
+padding: 0.4rem;
+font-size: 1.2rem;
+border: 1px solid #ccc;
+width: auto;
+}
+
+.battle__power-up__item {
+display: flex;
+justify-content: space-around;
+padding: 15px;
+}
+
+.battle__power-up__description{
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+padding: 0 10px;
+}
+
+.battle__power-up__image {
+height: 100px;
+}
+
+.battle__power-ups__form {
+display: flex;
+justify-content: space-around;
+}
+
+.btn {
+font-size: 1.35rem;
+margin-left: 0.5rem;
+margin-right: 0;
+}

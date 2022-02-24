@@ -15,7 +15,7 @@ export class UserPowerUpsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.getPowerUps();
+    console.log(this.powerUps)
   }
 
   private getPowerUps(): void {
