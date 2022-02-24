@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { POWER_UPS } from '../../utils/const/powerUps.consts';
+
 import { PowerUps } from '../../utils/interfaces/power-ups.interfaace';
+
+import { POWER_UPS } from '../../utils/const/powerUps.consts';
 
 @Component({
   selector: 'app-user-power-ups',

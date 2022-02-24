@@ -64,6 +64,14 @@ export class UserHeroListComponent implements OnInit, OnDestroy {
     this.router.navigate([this.routes.heroesRoot.path]);
   }
 
+  public infoHero(id: string): void {
+    this.router.navigate([this.routes.userInfo.path, this.routes.userHeroInfo.path], {
+      queryParams: {
+        id: id
+      }
+    })
+  }
+
   public ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }

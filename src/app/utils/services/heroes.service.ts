@@ -38,6 +38,7 @@ export class HeroesService {
     return this.http.get<Hero>(`${API.byId}/${id}`)
       .pipe(map((hero: Hero) => {
         return {
+          ...hero,
           id: hero.id,
           name: hero.name,
           powerstats: hero.powerstats,

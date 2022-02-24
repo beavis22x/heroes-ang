@@ -103,6 +103,7 @@ export class HeroesSelectPageComponent implements OnInit, OnDestroy {
     this.form.patchValue({
       search_panel: char
     })
+    this.alphabetToggle();
   }
 
   public isSelected(id: string): boolean {

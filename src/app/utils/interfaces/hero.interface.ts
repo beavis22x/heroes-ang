@@ -5,9 +5,15 @@ export interface Hero {
     url: string
   };
   id: string;
+  appearance?: Appearance;
+
 }
 
 export interface Powerstats {
+  [key: string]: string;
+}
+
+export interface Appearance {
   [key: string]: string;
 }
 

@@ -1,1 +1,61 @@
-<p>user-hero-info works!</p>
+<h1>Hero Info</h1>
+<div class="hero-info__container">
+  <div class="hero-info__img">
+    <img [src]="hero?.image?.url" alt="">
+  </div>
+  <div class="hero-info__description">
+    <div class="hero-info__name">
+      <h2>{{ hero.name }}</h2>
+    </div>
+    <div class="hero-info__appearance">
+      <ul>
+        <li>gender {{hero.appearance?.gender}} </li>
+        <li>race {{hero.appearance?.race}}</li>
+<!--        <li>height {{hero.appearance?.height}}</li>-->
+<!--        <li>weight {{hero.appearance?.weight}}</li>-->
+<!--        <li>eye-color {{hero?.appearance?['eye-color']}}</li>-->
+<!--        <li>hair-color {{hero?.appearance?['hair-color']}}</li>-->
+      </ul>
+    </div>
+    <div class="hero-info__biography">
+      <ul>
+        <li>Full Name </li>
+        <li>Alter Egos </li>
+        <li>aliases </li>
+        <li>Place of Birth </li>
+        <li>First appearance </li>
+        <li>publisher </li>
+        <li>alignment </li>
+      </ul>
+<!--      "full-name": "Ariel",-->
+<!--      "alter-egos": "No alter egos found.",-->
+<!--      "aliases": [-->
+<!--      "-"-->
+<!--      ],-->
+<!--      "place-of-birth": "-",-->
+<!--      "first-appearance": "Fallen Angels #1 (1987)",-->
+<!--      "publisher": "Marvel Comics",-->
+<!--      "alignment": "good"-->
+    </div>
+    <div class="hero-info__connections">
+      <div>group-affiliation </div>
+      <div>relatives </div>
+    </div>
+    <div class="hero-info__powerstats">
+      <ul>
+        <li>Combat: {{hero.powerstats?.combat}}</li>
+        <li>Durability: {{hero.powerstats?.durability}}</li>
+        <li>Intelligence: {{hero.powerstats?.intelligence}}</li>
+        <li>Power: {{hero.powerstats?.power}}</li>
+        <li>Speed: {{hero.powerstats?.speed}}</li>
+        <li>Strength: {{hero.powerstats?.strength}}</li>
+      </ul>
+    </div>
+    <div class="hero-info__work">
+        <div>Occupation </div>
+        <div>base </div>
+    </div>
+  </div>
+</div>
+
+
