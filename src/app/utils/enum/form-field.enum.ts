@@ -17,3 +17,7 @@ export enum ALERT_ENUM {
   loginAgain = 'Filled data',
   unsigned = 'Invalid email or password',
 }
+
+export enum SELECT_ENUM {
+  select = 'select'
+}

@@ -7,7 +7,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 
@@ -16,26 +16,32 @@ import { HeroesService } from '../../utils/services/heroes.service';
 import { Hero } from '../../utils/interfaces/hero.interface';
 import { PowerUps } from '../../utils/interfaces/power-ups.interfaace';
 
+import { SELECT_ENUM } from '../../utils/enum/form-field.enum';
+
 import { POWER_UPS } from '../../utils/const/powerUps.consts';
 import { EMPTY_STRING } from '../../utils/const/validators.const';
-import { RESULT_LOSE, RESULT_WIN } from '../../utils/const/unsort.consts';
+import { NULL_STRING, RESULT_LOSE, RESULT_WIN } from '../../utils/const/unsort.consts';
 
 import { getRandomId } from '../../utils/functions/common.functions';
+import { HistoryService } from '../../utils/services/history.service';
+import { HistoryObj } from '../../utils/interfaces/history.interface';
+import { PowerUpsService } from '../../utils/services/powerUps.service';
 
 @Component({
   selector: 'app-battle-page-component',
   templateUrl: './battle-page.component.html',
   styleUrls: ['./battle-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 })
 export class BattlePageComponent implements OnInit, OnDestroy {
   public toggleModal = false;
   public battleResult = EMPTY_STRING;
   public form!: FormGroup;
+  public formFields = SELECT_ENUM;
   public hero!: Hero;
   public opponent!: Hero;
-  public powerUps: PowerUps[] = POWER_UPS;
+  public powerUps: PowerUps[] = [];
   public selectPowerUp!: PowerUps;
   public subscriptions: Subscription = new Subscription();
   public heroPower = 0;
@@ -44,14 +50,18 @@ export class BattlePageComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroesService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private historyService: HistoryService,
+    private powerService: PowerUpsService
   ) {
   }
 
   public ngOnInit(): void {
     this.initBattle();
     this.initForm();
+    this.initPowerUps()
     this.changeUp();
+    console.log(this.powerService.powerUpsSubject.getValue())
   }
 
   public initForm(): void {
@@ -63,6 +73,12 @@ export class BattlePageComponent implements OnInit, OnDestroy {
   public initBattle(): void {
     this.getHero();
     this.getOpponent();
+  }
+
+  public initPowerUps(): void {
+    this.subscriptions.add(this.powerService.powerUpsSubject.subscribe((arr: PowerUps[]) => {
+      this.powerUps = arr;
+    }))
   }
 
   public getHero(): void {
@@ -82,28 +98,18 @@ export class BattlePageComponent implements OnInit, OnDestroy {
   }
 
   public changeUp():void {
-    this.subscriptions.add(this.form.get('select')?.valueChanges.subscribe((up) => {
+    this.subscriptions.add(this.form.get(this.formFields.select)?.valueChanges.subscribe((up) => {
       this.selectPowerUp = up;
     }))
   }
 
   public chooseUp(): void {
-    if(this.form.get('select')?.dirty) {
+    if(this.form.get(this.formFields.select)?.dirty) {
       const ability = this.selectPowerUp.description.slice(0, -4);
       const improve = Number(this.hero.powerstats[ability]) + 10;
 
+      this.powerService.usePowerUp(this.selectPowerUp.id)
       this.hero.powerstats[ability] = improve.toString();
-      this.powerUps = this.powerUps.map((item) => {
-        if(item.id === this.selectPowerUp.id && item.remainAmount > 0) {
-          return {
-            ...item,
-            active: !item.active,
-            remainAmount: item.remainAmount - 1
-          }
-        }
-
-        return item;
-      })
       console.log(this.powerUps)
     }
 
@@ -111,6 +117,7 @@ export class BattlePageComponent implements OnInit, OnDestroy {
 
   public fight(): void {
     this.calcResultBattle();
+    this.setBattleHistory();
     this.toggleModal = !this.toggleModal;
   }
 
@@ -128,7 +135,7 @@ export class BattlePageComponent implements OnInit, OnDestroy {
   public calcOpponentPower(): void {
     const entries = Object.entries(this.opponent.powerstats);
     entries.map((arr: [string, string]) => {
-      if (arr[1] === 'null') {
+      if (arr[1] === NULL_STRING) {
         return;
       }
 
@@ -142,10 +149,25 @@ export class BattlePageComponent implements OnInit, OnDestroy {
     this.heroPower > this.opponentPower
       ? this.battleResult = RESULT_WIN
       : this.battleResult = RESULT_LOSE
-    console.log(this.heroPower)
+  }
+
+  public setBattleHistory():void {
+    const history: HistoryObj = {
+      date: new Date,
+      hero: this.hero.name,
+      opponent: this.opponent.name,
+      result: this.battleResult
+    }
+
+    this.historyService.addBattle(history);
   }
 
   public closeModal(): void {
+    if(this.battleResult === RESULT_WIN) {
+      this.getOpponent();
+    }
+
+    this.powerService.offActiveUp(this.selectPowerUp.id);
     this.toggleModal = !this.toggleModal;
   }
 

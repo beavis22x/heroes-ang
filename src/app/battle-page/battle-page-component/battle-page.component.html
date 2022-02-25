@@ -68,7 +68,7 @@
         <form [formGroup]="form"
               class="battle__power-ups__form">
           <p>
-            <select formControlName="select">
+            <select [formControlName]="formFields.select">
               <option [ngValue]="null" disabled>Select PowerUp</option>
               <option *ngFor="let powerUp of powerUps"
                       [ngValue]="powerUp">

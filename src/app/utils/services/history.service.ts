@@ -8,25 +8,7 @@ import { HistoryObj } from '../interfaces/history.interface';
   providedIn: 'root'
 })
 export class HistoryService {
-  public historySubject = new BehaviorSubject<HistoryObj[]>([{
-    date: new Date,
-    hero: 'Hero',
-    opponent: 'Loh',
-    result: 'win',
-  },
-  {
-    date: new Date(new Date().setHours(new Date().getHours() + 1)),
-    hero: 'Lego',
-    opponent: 'Coh',
-    result: 'lose',
-  },
-  {
-    date: new Date(new Date().setHours(new Date().getHours() + 1)),
-    hero: 'Ago',
-    opponent: 'Coh',
-    result: 'win',
-  }
-    ]);
+  public historySubject = new BehaviorSubject<HistoryObj[]>([]);
 
   public addBattle(history: HistoryObj): void {
     this.historySubject.next([...this.historySubject.getValue(), history]);
