@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { HeroesRoutingModule } from './herous-routing-module';
+import { HeroesRoutingModule } from './herous-routing.module';
 
-import { HeroesSelectPageComponent } from './heroes-select-page/heroes-select-page.component';
+import { HeroesComponent } from './heroes.component';
 
 @NgModule({
   declarations: [
-    HeroesSelectPageComponent,
+    HeroesComponent,
   ],
   imports: [
     CommonModule,

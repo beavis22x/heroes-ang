@@ -34,7 +34,8 @@ export class StorageService {
     return localStorage.getItem(this.authToken.token_expire);
   }
 
-  public clearStorage(): void {
-    localStorage.clear();
+  public clearToken(): void {
+    localStorage.removeItem(this.authToken.token_expire);
+    localStorage.removeItem(this.authToken.token);
   }
 }

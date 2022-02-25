@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { BattlePageRoutingModule } from './battle-page-routing.module';
 
-import { BattlePageComponent } from './battle-page-component/battle-page.component';
+import { BattlePageComponent } from './battle-page.component';
 
 @NgModule({
   declarations: [

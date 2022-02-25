@@ -10,21 +10,21 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 
-import { HeroesService } from '../../../utils/services/heroes.service';
-import { PowerUpsService } from '../../../utils/services/power-ups.service';
-import { HistoryService } from '../../../utils/services/history.service';
-import { SelectBattleHeroService } from '../../../utils/services/select-battle-hero.service';
+import { HeroesService } from '../../utils/services/heroes.service';
+import { PowerUpsService } from '../../utils/services/power-ups.service';
+import { HistoryService } from '../../utils/services/history.service';
+import { SelectBattleHeroService } from '../../utils/services/select-battle-hero.service';
 
-import { Hero } from '../../../utils/interfaces/hero.interface';
-import { PowerUps } from '../../../utils/interfaces/power-ups.interface';
-import { HistoryObj } from '../../../utils/interfaces/history.interface';
+import { Hero } from '../../utils/interfaces/hero.interface';
+import { PowerUps } from '../../utils/interfaces/power-ups.interface';
+import { HistoryObj } from '../../utils/interfaces/history.interface';
 
-import { SELECT_ENUM } from '../../../utils/enum/form-field.enum';
+import { SELECT_ENUM } from '../../utils/enum/form-field.enum';
 
-import { EMPTY_STRING } from '../../../utils/const/validators.const';
-import { NULL_STRING, RESULT_LOSE, RESULT_WIN } from '../../../utils/const/unsort.consts';
+import { EMPTY_STRING } from '../../utils/const/validators.const';
+import { NULL_STRING, RESULT_LOSE, RESULT_WIN } from '../../utils/const/unsort.consts';
 
-import { getRandomId } from '../../../utils/functions/common.functions';
+import { getRandomId } from '../../utils/functions/common.functions';
 
 @Component({
   selector: 'app-battle-page-component',
@@ -111,10 +111,11 @@ export class BattlePageComponent implements OnInit, OnDestroy {
 
   public chooseUp(): void {
     if(this.form.get(this.formFields.select)?.dirty) {
-      const ability = this.selectPowerUp.description.slice(0, -4);
-      const improve = Number(this.hero.powerstats[ability]) + 10;
+      const ability = this.selectPowerUp.attribute;
+      const bonus = this.selectPowerUp.bonus;
+      const improve = Number(this.hero.powerstats[ability]) + bonus;
 
-      this.powerUpsService.usePowerUp(this.selectPowerUp.id)
+      this.powerUpsService.usePowerUp(this.selectPowerUp.id);
       this.hero.powerstats[ability] = improve.toString();
     }
   }

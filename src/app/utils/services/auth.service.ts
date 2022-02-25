@@ -51,7 +51,7 @@ export class AuthService {
       this.storage.setToken(token);
       this.storage.setTokenExpire(expiresDate);
     } else {
-      this.storage.clearStorage();
+      this.storage.clearToken();
     }
   }
 }

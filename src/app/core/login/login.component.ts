@@ -4,26 +4,26 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { filter } from 'rxjs';
 
-import { AuthService } from '../../../utils/services/auth.service';
-import { StorageService } from '../../../utils/services/storage.service';
+import { AuthService } from '../../utils/services/auth.service';
+import { StorageService } from '../../utils/services/storage.service';
 
-import { RouteConfigs } from '../../../utils/interfaces/routes.interfaces';
+import { RouteConfigs } from '../../utils/interfaces/routes.interfaces';
 
-import { ALERT_ENUM, LOGIN_FIELDS_ENUM } from '../../../utils/enum/form-field.enum';
+import { ALERT_ENUM, LOGIN_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
 
-import { EMPTY_STRING, LOGIN_AGAIN, MIN_LENGTH_LOGIN } from '../../../utils/const/validators.const';
-import { ROUTE_CONFIGS } from '../../../utils/const/routes.consts';
+import { EMPTY_STRING, LOGIN_AGAIN, MIN_LENGTH_LOGIN } from '../../utils/const/validators.const';
+import { ROUTE_CONFIGS } from '../../utils/const/routes.consts';
 
-import { emailRegEx, passwordRegEx } from '../../../utils/reg-exp/login.regExp';
+import { emailRegEx, passwordRegEx } from '../../utils/reg-exp/login.regExp';
 
 
 @Component({
   selector: 'app-login-page',
-  templateUrl: './login-page.component.html',
-  styleUrls: ['./login-page.component.scss'],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginPageComponent implements OnInit {
+export class LoginComponent implements OnInit {
   public form!: FormGroup;
   public fieldFormEnum = LOGIN_FIELDS_ENUM;
   public routes: RouteConfigs = ROUTE_CONFIGS;

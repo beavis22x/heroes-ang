@@ -3,25 +3,25 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { debounceTime, distinctUntilChanged, Subscription } from 'rxjs';
 
-import { HeroesService } from '../../../utils/services/heroes.service';
-import { SelectedHeroesService } from '../../../utils/services/selected-heroes.service';
+import { HeroesService } from '../../utils/services/heroes.service';
+import { SelectedHeroesService } from '../../utils/services/selected-heroes.service';
 
-import { Hero } from '../../../utils/interfaces/hero.interface';
+import { Hero } from '../../utils/interfaces/hero.interface';
 
-import { SEARCH_FIELDS_ENUM } from '../../../utils/enum/form-field.enum';
+import { SEARCH_FIELDS_ENUM } from '../../utils/enum/form-field.enum';
 
-import { alphabetArray } from '../../../utils/const/validators.const';
-import { SEARCH_DELAY } from '../../../utils/const/unsort.consts';
+import { alphabetArray } from '../../utils/const/validators.const';
+import { SEARCH_DELAY } from '../../utils/const/unsort.consts';
 
-import { searchPanelRegEx } from '../../../utils/reg-exp/login.regExp';
+import { searchPanelRegEx } from '../../utils/reg-exp/login.regExp';
 
 @Component({
   selector: 'app-heroes',
-  templateUrl: './heroes-select-page.component.html',
-  styleUrls: ['./heroes-select-page.component.scss'],
+  templateUrl: './heroes.component.html',
+  styleUrls: ['./heroes.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HeroesSelectPageComponent implements OnInit, OnDestroy {
+export class HeroesComponent implements OnInit, OnDestroy {
   public form!: FormGroup;
   public subscriptions: Subscription = new Subscription();
   public heroes: Hero[] = [];
@@ -54,7 +54,6 @@ export class HeroesSelectPageComponent implements OnInit, OnDestroy {
       ])
     })
   }
-
   public getSelectedHeroesId(): void {
     this.subscriptions.add(this.selectedService.getSelectedHeroes.subscribe((arr: Hero[]) => {
       this.selectedHeroesId = arr.map((hero: Hero) => hero.id);

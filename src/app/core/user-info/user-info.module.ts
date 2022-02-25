@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { UserLayoutRoutingModule } from './user-info-routing.module';
 
-import { UserLayoutComponent } from './user-layout/user-layout.component';
+import { UserInfoComponent } from './user-info.component';
 import { UserHeroListComponent } from './user-hero-list/user-hero-list.component';
 import { UserHistoryComponent } from './user-history/user-history.component';
 import { UserPowerUpsComponent } from './user-power-ups/user-power-ups.component';
@@ -11,7 +11,7 @@ import { UserHeroInfoComponent } from './user-hero-info/user-hero-info.component
 
 @NgModule({
   declarations: [
-    UserLayoutComponent,
+    UserInfoComponent,
     UserHeroListComponent,
     UserHistoryComponent,
     UserPowerUpsComponent,
