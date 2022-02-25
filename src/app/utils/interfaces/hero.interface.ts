@@ -6,7 +6,6 @@ export interface Hero {
   };
   id: string;
   appearance?: Appearance;
-
 }
 
 export interface Powerstats {

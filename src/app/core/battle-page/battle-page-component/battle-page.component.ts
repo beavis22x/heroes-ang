@@ -40,6 +40,7 @@ export class BattlePageComponent implements OnInit, OnDestroy {
   public hero!: Hero;
   public opponent!: Hero;
   public powerUps: PowerUps[] = [];
+  public battleHeroId!: string;
   public selectPowerUp!: PowerUps;
   public subscriptions: Subscription = new Subscription();
   public heroPower = 0;
@@ -50,7 +51,7 @@ export class BattlePageComponent implements OnInit, OnDestroy {
     private heroService: HeroesService,
     private cd: ChangeDetectorRef,
     private historyService: HistoryService,
-    private powerService: PowerUpsService,
+    private powerUpsService: PowerUpsService,
     private selectBattleHeroService: SelectBattleHeroService
   ) {
   }
@@ -74,14 +75,19 @@ export class BattlePageComponent implements OnInit, OnDestroy {
   }
 
   public initPowerUps(): void {
-    this.subscriptions.add(this.powerService.powerUpsSubject.subscribe((arr: PowerUps[]) => {
+    this.subscriptions.add(this.powerUpsService.PowerUps
+      .subscribe((arr: PowerUps[]) => {
       this.powerUps = arr;
     }))
   }
 
   public getHero(): void {
+    this.subscriptions.add(this.selectBattleHeroService.getBattleHeroId
+      .subscribe((hero: Hero) => {
+      this.battleHeroId = hero.id
+    }))
     this.subscriptions.add(this.heroService
-      .getById(this.selectBattleHeroService.getBattleHeroId() || '12')
+      .getById(this.battleHeroId || '12')
       .subscribe((hero: Hero) => {
       this.hero = hero;
 
@@ -108,7 +114,7 @@ export class BattlePageComponent implements OnInit, OnDestroy {
       const ability = this.selectPowerUp.description.slice(0, -4);
       const improve = Number(this.hero.powerstats[ability]) + 10;
 
-      this.powerService.usePowerUp(this.selectPowerUp.id)
+      this.powerUpsService.usePowerUp(this.selectPowerUp.id)
       this.hero.powerstats[ability] = improve.toString();
     }
   }
@@ -151,13 +157,13 @@ export class BattlePageComponent implements OnInit, OnDestroy {
 
   public setBattleHistory():void {
     const history: HistoryObj = {
-      date: new Date,
+      date: new Date(),
       hero: this.hero.name,
       opponent: this.opponent.name,
       result: this.battleResult
     }
 
-    this.historyService.addBattle(history);
+    this.historyService.addBattleInHistory = history;
   }
 
   public closeModal(): void {
@@ -165,12 +171,11 @@ export class BattlePageComponent implements OnInit, OnDestroy {
       this.getOpponent();
     }
 
-    this.powerService.offActiveUp(this.selectPowerUp?.id);
+    this.powerUpsService.resetPowerUpActive(this.selectPowerUp?.id);
     this.toggleModal = !this.toggleModal;
   }
 
   public ngOnDestroy(): void {
-    this.powerService.offActiveUp(this.selectPowerUp?.id);
     this.subscriptions.unsubscribe();
   }
 }

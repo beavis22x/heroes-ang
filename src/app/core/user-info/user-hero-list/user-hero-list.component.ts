@@ -45,7 +45,7 @@ export class UserHeroListComponent implements OnInit, OnDestroy {
   }
 
   public getSelectedHeroes(): void {
-    this.subscriptions.add(this.selectedHeroesService.selectedHeroesSubject
+    this.subscriptions.add(this.selectedHeroesService.getSelectedHeroes
       .subscribe((heroes: Hero[]) => {
         this.selectedHeroes = [...heroes];
         this.selectBattleHero(heroes[0]);
@@ -56,7 +56,7 @@ export class UserHeroListComponent implements OnInit, OnDestroy {
 
   public selectBattleHero(battleHero: Hero): void {
     this.selectedBattleHeroName = battleHero?.name;
-    this.selectBattleHeroService.selectBattleHero(battleHero);
+    this.selectBattleHeroService.selectBattleHero = battleHero;
   }
 
   public deleteHero(id: string): void {

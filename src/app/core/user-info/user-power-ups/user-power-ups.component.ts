@@ -16,7 +16,7 @@ export class UserPowerUpsComponent implements OnInit, OnDestroy {
   public powerUps: PowerUps[] = [];
   public subscriptions: Subscription = new Subscription();
 
-  constructor(private powerService: PowerUpsService) {
+  constructor(private powerUpsService: PowerUpsService) {
   }
 
   ngOnInit(): void {
@@ -24,7 +24,8 @@ export class UserPowerUpsComponent implements OnInit, OnDestroy {
   }
 
   private getPowerUps(): void {
-    this.subscriptions.add(this.powerService.powerUpsSubject.subscribe((arr: PowerUps[]) => {
+    this.subscriptions.add(this.powerUpsService.PowerUps
+      .subscribe((arr: PowerUps[]) => {
       this.powerUps = arr;
     }))
   }

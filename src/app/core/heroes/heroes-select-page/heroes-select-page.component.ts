@@ -56,7 +56,7 @@ export class HeroesSelectPageComponent implements OnInit, OnDestroy {
   }
 
   public getSelectedHeroesId(): void {
-    this.subscriptions.add(this.selectedService.selectedHeroesSubject.subscribe((arr: Hero[]) => {
+    this.subscriptions.add(this.selectedService.getSelectedHeroes.subscribe((arr: Hero[]) => {
       this.selectedHeroesId = arr.map((hero: Hero) => hero.id);
     }))
   }
