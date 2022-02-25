@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { HistoryObj } from '../interfaces/history.interface';
 
@@ -8,9 +8,14 @@ import { HistoryObj } from '../interfaces/history.interface';
   providedIn: 'root'
 })
 export class HistoryService {
-  public historySubject = new BehaviorSubject<HistoryObj[]>([]);
+  private historySubject$$ = new BehaviorSubject<HistoryObj[]>([]);
+  public _historyObservable$: Observable<HistoryObj[]> = this.historySubject$$.asObservable();
 
-  public addBattle(history: HistoryObj): void {
-    this.historySubject.next([...this.historySubject.getValue(), history]);
+  public set addBattleInHistory(history: HistoryObj) {
+    this.historySubject$$.next([...this.historySubject$$.getValue(), history]);
+  }
+
+  public get historySubject(): Observable<HistoryObj[]> {
+    return this._historyObservable$;
   }
 }

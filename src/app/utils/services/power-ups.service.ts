@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { PowerUps } from '../interfaces/power-ups.interface';
 
@@ -10,11 +10,16 @@ import { POWER_UPS } from '../const/power-ups.consts';
   providedIn: 'root'
 })
 export class PowerUpsService {
-  public powerUpsSubject = new BehaviorSubject<PowerUps[]>([...POWER_UPS]);
+  private powerUpsSubject$$ = new BehaviorSubject<PowerUps[]>([...POWER_UPS]);
+  public _powerUpsObservable$: Observable<PowerUps[]> = this.powerUpsSubject$$.asObservable();
+
+  public get PowerUps (): Observable<PowerUps[]> {
+    return this._powerUpsObservable$;
+  }
 
   public usePowerUp(id: number): void {
-    this.powerUpsSubject.next(
-      this.powerUpsSubject.getValue().map((item: PowerUps) => {
+    this.powerUpsSubject$$.next(
+      this.powerUpsSubject$$.getValue().map((item: PowerUps) => {
         if (id === item.id && item.remainAmount > 0) {
           return {
             ...item,
@@ -27,9 +32,9 @@ export class PowerUpsService {
     )
   }
 
-  public offActiveUp(id: number): void {
-    this.powerUpsSubject.next(
-      this.powerUpsSubject.getValue().map((item: PowerUps) => {
+  public resetPowerUpActive(id: number): void {
+    this.powerUpsSubject$$.next(
+      this.powerUpsSubject$$.getValue().map((item: PowerUps) => {
         if (id === item.id && item.remainAmount > 0) {
           return {
             ...item,
