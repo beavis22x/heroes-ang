@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 
 import { SelectedHeroesService } from '../../../utils/services/selected-heroes.service';
 import { HeroesService } from '../../../utils/services/heroes.service';
-import { SelectBattleHeroService } from '../../../utils/services/select-battle-hero.service';
+import { BattleHeroService } from '../../../utils/services/battle-hero.service';
 
 import { Hero } from '../../../utils/interfaces/hero.interface';
 import { RouteConfigs } from '../../../utils/interfaces/routes.interfaces';
@@ -36,7 +36,7 @@ export class UserHeroListComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef,
     private heroService: HeroesService,
     private router: Router,
-    private selectBattleHeroService: SelectBattleHeroService
+    private battleHeroService: BattleHeroService
   ) {
   }
 
@@ -45,18 +45,18 @@ export class UserHeroListComponent implements OnInit, OnDestroy {
   }
 
   public getSelectedHeroes(): void {
-    this.subscriptions.add(this.selectedHeroesService.getSelectedHeroes
+    this.subscriptions.add(this.selectedHeroesService.getSelectedHeroes$
       .subscribe((heroes: Hero[]) => {
         this.selectedHeroes = [...heroes];
-        this.selectBattleHero(heroes[0]);
+        this.setBattleHero(heroes[0]);
 
         this.cd.markForCheck();
       }))
   }
 
-  public selectBattleHero(battleHero: Hero): void {
+  public setBattleHero(battleHero: Hero): void {
     this.selectedBattleHeroName = battleHero?.name;
-    this.selectBattleHeroService.selectBattleHero = battleHero;
+    this.battleHeroService.setBattleHero = battleHero;
   }
 
   public deleteHero(id: string): void {

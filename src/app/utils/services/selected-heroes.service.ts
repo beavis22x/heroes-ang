@@ -9,10 +9,9 @@ import { Hero } from '../interfaces/hero.interface';
 })
 export class SelectedHeroesService {
   private selectedHeroesSubject$$ = new BehaviorSubject<Hero[]>([]);
-  public _selectedHeroesObservable$: Observable<Hero[]> = this.selectedHeroesSubject$$.asObservable();
 
-  public get getSelectedHeroes(): Observable<Hero[]>{
-    return this._selectedHeroesObservable$;
+  public get getSelectedHeroes$(): Observable<Hero[]>{
+    return this.selectedHeroesSubject$$.asObservable();
   }
 
   public addHero(hero: Hero): void {

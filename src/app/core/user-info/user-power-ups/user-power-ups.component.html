@@ -1,17 +1,17 @@
 <h1>Power Ups</h1>
 <div class="power-ups__list">
-  <div *ngFor="let powerUp of powerUps"
-       class="power-ups__item"
-       [ngClass]="{active: powerUp.active}">
-    <div class="power-ups__image">
-      <img [src]="powerUp.img" alt="power-up">
-    </div>
-    <div class="power-ups__description">
-      <span><h2>{{ powerUp.name }}</h2></span>
-      <span><h3>{{ powerUp.description }}</h3></span>
-      <div>
-        <span>Remain Amount {{ powerUp.remainAmount }}</span>
+    <div *ngFor="let powerUp of powerUps$ | async"
+      class="power-ups__item"
+      [ngClass]="{active: powerUp?.active}">
+      <div class="power-ups__image">
+        <img [src]="powerUp?.img" alt="power-up">
+      </div>
+      <div class="power-ups__description">
+        <span><h2>{{ powerUp?.name }}</h2></span>
+        <span><h3>{{ powerUp?.description }}</h3></span>
+        <div>
+          <span>Remain Amount {{ powerUp?.remainAmount }}</span>
+        </div>
       </div>
     </div>
-  </div>
 </div>

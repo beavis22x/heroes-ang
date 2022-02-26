@@ -8,12 +8,12 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
 
 import { HeroesService } from '../../utils/services/heroes.service';
 import { PowerUpsService } from '../../utils/services/power-ups.service';
 import { HistoryService } from '../../utils/services/history.service';
-import { SelectBattleHeroService } from '../../utils/services/select-battle-hero.service';
+import { BattleHeroService } from '../../utils/services/battle-hero.service';
 
 import { Hero } from '../../utils/interfaces/hero.interface';
 import { PowerUps } from '../../utils/interfaces/power-ups.interface';
@@ -52,7 +52,7 @@ export class BattlePageComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef,
     private historyService: HistoryService,
     private powerUpsService: PowerUpsService,
-    private selectBattleHeroService: SelectBattleHeroService
+    private battleHeroService: BattleHeroService
   ) {
   }
 
@@ -75,42 +75,45 @@ export class BattlePageComponent implements OnInit, OnDestroy {
   }
 
   public initPowerUps(): void {
-    this.subscriptions.add(this.powerUpsService.PowerUps
+    this.subscriptions.add(this.powerUpsService.getPowerUps$
       .subscribe((arr: PowerUps[]) => {
-      this.powerUps = arr;
-    }))
+        this.powerUps = arr;
+      }))
   }
 
   public getHero(): void {
-    this.subscriptions.add(this.selectBattleHeroService.getBattleHeroId
+    this.subscriptions.add(this.battleHeroService.getBattleHero$
+      .pipe(
+        switchMap((hero: Hero) =>
+          this.heroService.getById(hero?.id || '12')
+        )
+      )
       .subscribe((hero: Hero) => {
-      this.battleHeroId = hero.id
-    }))
-    this.subscriptions.add(this.heroService
-      .getById(this.battleHeroId || '12')
-      .subscribe((hero: Hero) => {
-      this.hero = hero;
+        this.hero = hero;
 
-      this.cd.markForCheck();
-    }))
+        this.cd.markForCheck();
+      }))
   }
 
   public getOpponent(): void {
-    this.subscriptions.add(this.heroService.getById(getRandomId()).subscribe((opponent: Hero) => {
-      this.opponent = opponent;
+    this.subscriptions.add(this.heroService.getById(getRandomId())
+      .subscribe((opponent: Hero) => {
+        this.opponent = opponent;
+        console.log(opponent)
 
-      this.cd.markForCheck();
-    }))
+        this.cd.markForCheck();
+      }))
   }
 
-  public changeUp():void {
-    this.subscriptions.add(this.form.get(this.formFields.select)?.valueChanges.subscribe((up) => {
-      this.selectPowerUp = up;
-    }))
+  public changeUp(): void {
+    this.subscriptions.add(this.form.get(this.formFields.select)?.valueChanges
+      .subscribe((powerUp) => {
+        this.selectPowerUp = powerUp;
+      }))
   }
 
   public chooseUp(): void {
-    if(this.form.get(this.formFields.select)?.dirty) {
+    if (this.form.get(this.formFields.select)?.dirty && this.selectPowerUp.remainAmount > 0) {
       const ability = this.selectPowerUp.attribute;
       const bonus = this.selectPowerUp.bonus;
       const improve = Number(this.hero.powerstats[ability]) + bonus;
@@ -156,7 +159,7 @@ export class BattlePageComponent implements OnInit, OnDestroy {
       : this.battleResult = RESULT_LOSE
   }
 
-  public setBattleHistory():void {
+  public setBattleHistory(): void {
     const history: HistoryObj = {
       date: new Date(),
       hero: this.hero.name,
@@ -168,7 +171,7 @@ export class BattlePageComponent implements OnInit, OnDestroy {
   }
 
   public closeModal(): void {
-    if(this.battleResult === RESULT_WIN) {
+    if (this.battleResult === RESULT_WIN) {
       this.getOpponent();
     }
 

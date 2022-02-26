@@ -33,7 +33,7 @@ export class UserHistoryComponent implements OnInit, OnDestroy {
   }
 
   public initHistory(): void {
-    this.subscriptions.add(this.historyService.historySubject.subscribe((arr: HistoryObj[]) => {
+    this.subscriptions.add(this.historyService.getHistorySubject$.subscribe((arr: HistoryObj[]) => {
       this.historyArray = arr;
     }))
   }

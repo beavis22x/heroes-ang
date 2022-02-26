@@ -11,10 +11,9 @@ import { POWER_UPS } from '../const/power-ups.consts';
 })
 export class PowerUpsService {
   private powerUpsSubject$$ = new BehaviorSubject<PowerUps[]>([...POWER_UPS]);
-  public _powerUpsObservable$: Observable<PowerUps[]> = this.powerUpsSubject$$.asObservable();
 
-  public get PowerUps (): Observable<PowerUps[]> {
-    return this._powerUpsObservable$;
+  public get getPowerUps$ (): Observable<PowerUps[]> {
+    return this.powerUpsSubject$$.asObservable();
   }
 
   public usePowerUp(id: number): void {

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { AuthService } from '../../utils/services/auth.service';
-import { SelectBattleHeroService } from '../../utils/services/select-battle-hero.service';
+import { BattleHeroService } from '../../utils/services/battle-hero.service';
 
 import { RouteConfigs } from '../../utils/interfaces/routes.interfaces';
 import { Hero } from '../../utils/interfaces/hero.interface';
@@ -25,7 +25,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy{
   constructor(
     public auth: AuthService,
     private router: Router,
-    private selectBattleHero: SelectBattleHeroService,
+    private battleHeroService: BattleHeroService,
   ) {
   }
 
@@ -39,7 +39,7 @@ export class MainLayoutComponent implements OnInit, OnDestroy{
   }
 
   public updateHeroImg(): void {
-    this.subscriptions.add(this.selectBattleHero.getBattleHeroId
+    this.subscriptions.add(this.battleHeroService.getBattleHero$
       .subscribe((hero: Hero) => {
       this.heroImgUrl = hero?.image;
     }))

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { PowerUpsService } from '../../../utils/services/power-ups.service';
 
@@ -13,21 +13,18 @@ import { PowerUps } from '../../../utils/interfaces/power-ups.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserPowerUpsComponent implements OnInit, OnDestroy {
-  public powerUps: PowerUps[] = [];
+  public powerUps$!: Observable<PowerUps[]>;
   public subscriptions: Subscription = new Subscription();
 
   constructor(private powerUpsService: PowerUpsService) {
   }
 
   ngOnInit(): void {
-    this.getPowerUps();
+    this.initPowerUps();
   }
 
-  private getPowerUps(): void {
-    this.subscriptions.add(this.powerUpsService.PowerUps
-      .subscribe((arr: PowerUps[]) => {
-      this.powerUps = arr;
-    }))
+  private initPowerUps(): void {
+    this.powerUps$ = this.powerUpsService.getPowerUps$
   }
 
   public ngOnDestroy(): void {
