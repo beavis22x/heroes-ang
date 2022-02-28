@@ -21,8 +21,7 @@ import { HistoryObj } from '../../utils/interfaces/history.interface';
 
 import { SELECT_ENUM } from '../../utils/enum/form-field.enum';
 
-import { EMPTY_STRING } from '../../utils/const/validators.const';
-import { RESULT_LOSE, RESULT_WIN } from '../../utils/const/unsort.consts';
+import { battleResult } from '../../utils/types/type';
 
 import { getRandomId } from '../../utils/functions/common.functions';
 
@@ -34,7 +33,7 @@ import { getRandomId } from '../../utils/functions/common.functions';
 })
 export class BattlePageComponent implements OnInit, OnDestroy {
   public toggleModal = false;
-  public battleResult = EMPTY_STRING;
+  public battleResult!: battleResult;
   public form!: FormGroup;
   public formFields = SELECT_ENUM;
   public hero!: Hero;
@@ -122,7 +121,7 @@ export class BattlePageComponent implements OnInit, OnDestroy {
   }
 
   public fight(): void {
-    this.calcResultBattle();
+    this.calcBattleResult();
     this.setBattleHistory();
     this.toggleModal = !this.toggleModal;
   }
@@ -153,19 +152,19 @@ export class BattlePageComponent implements OnInit, OnDestroy {
     },0)
   }
 
-  public calcResultBattle() {
+  public calcBattleResult() {
     this.calcHeroPower();
     this.calcOpponentPower();
     this.heroPower > this.opponentPower
-      ? this.battleResult = RESULT_WIN
-      : this.battleResult = RESULT_LOSE
+      ? this.battleResult = "WIN"
+      : this.battleResult = "LOSE"
   }
 
   public setBattleHistory(): void {
     const history: HistoryObj = {
       date: new Date(),
-      hero: this.hero.name,
-      opponent: this.opponent.name,
+      hero: this.hero?.name,
+      opponent: this.opponent?.name,
       result: this.battleResult
     }
 
@@ -173,11 +172,11 @@ export class BattlePageComponent implements OnInit, OnDestroy {
   }
 
   public closeModal(): void {
-    if (this.battleResult === RESULT_WIN) {
+    if (this.battleResult === "WIN") {
       this.getOpponent();
     }
 
-    this.powerUpsService.resetPowerUpActive(this.selectPowerUp?.id);
+    this.powerUpsService.resetActivePowerUp(this.selectPowerUp?.id);
     this.toggleModal = !this.toggleModal;
   }
 

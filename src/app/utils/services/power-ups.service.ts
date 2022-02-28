@@ -31,7 +31,7 @@ export class PowerUpsService {
     )
   }
 
-  public resetPowerUpActive(id: number): void {
+  public resetActivePowerUp(id: number): void {
     this.powerUpsSubject$$.next(
       this.powerUpsSubject$$.getValue().map((item: PowerUps) => {
         if (id === item.id && item.remainAmount > 0) {
