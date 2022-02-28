@@ -19,7 +19,7 @@ export class UserPowerUpsComponent implements OnInit, OnDestroy {
   constructor(private powerUpsService: PowerUpsService) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.initPowerUps();
   }
 

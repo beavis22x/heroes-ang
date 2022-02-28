@@ -8,13 +8,13 @@ import { HistoryObj } from '../interfaces/history.interface';
   providedIn: 'root'
 })
 export class HistoryService {
-  private historySubject$$ = new BehaviorSubject<HistoryObj[]>([]);
+  private history$$ = new BehaviorSubject<HistoryObj[]>([]);
 
   public get getHistorySubject$(): Observable<HistoryObj[]> {
-    return this.historySubject$$.asObservable();
+    return this.history$$.asObservable();
   }
 
   public set addBattleInHistory(history: HistoryObj) {
-    this.historySubject$$.next([...this.historySubject$$.getValue(), history]);
+    this.history$$.next([...this.history$$.getValue(), history]);
   }
 }

@@ -16,7 +16,7 @@ import { HERO, OPPONENT, RESULT } from '../../../utils/const/sort.consts';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserHistoryComponent implements OnInit, OnDestroy {
-  public historyArray: HistoryObj[] = [];
+  public history: HistoryObj[] = [];
   public subscriptions: Subscription = new Subscription();
   public dateDir = false;
   public heroDir = false;
@@ -34,27 +34,27 @@ export class UserHistoryComponent implements OnInit, OnDestroy {
 
   public initHistory(): void {
     this.subscriptions.add(this.historyService.getHistorySubject$.subscribe((arr: HistoryObj[]) => {
-      this.historyArray = arr;
+      this.history = arr;
     }))
   }
 
   public sortDate(): void {
-    this.historyArray = this.sortService.sortDate(this.historyArray, this.dateDir);
+    this.history = this.sortService.sortDate(this.history, this.dateDir);
     this.dateDir = !this.dateDir;
   }
 
   public sortHero():void {
-    this.historyArray = this.sortService.sortByAlphabet(this.historyArray, this.heroDir, HERO);
+    this.history = this.sortService.sortByAlphabet(this.history, this.heroDir, HERO);
     this.heroDir = !this.heroDir;
   }
 
   public sortOpponent():void {
-    this.historyArray = this.sortService.sortByAlphabet(this.historyArray, this.opponDir, OPPONENT);
+    this.history = this.sortService.sortByAlphabet(this.history, this.opponDir, OPPONENT);
     this.opponDir = !this.opponDir;
   }
 
   public sortResult():void {
-    this.historyArray = this.sortService.sortByAlphabet(this.historyArray, this.resultDir, RESULT);
+    this.history = this.sortService.sortByAlphabet(this.history, this.resultDir, RESULT);
     this.resultDir = !this.resultDir;
   }
 

@@ -21,7 +21,7 @@ import { HistoryObj } from '../../utils/interfaces/history.interface';
 
 import { SELECT_ENUM } from '../../utils/enum/form-field.enum';
 
-import { battleResult } from '../../utils/types/type';
+import { BattleResult } from '../../utils/types/type';
 
 import { getRandomId } from '../../utils/functions/common.functions';
 
@@ -33,7 +33,7 @@ import { getRandomId } from '../../utils/functions/common.functions';
 })
 export class BattlePageComponent implements OnInit, OnDestroy {
   public toggleModal = false;
-  public battleResult!: battleResult;
+  public battleResult!: BattleResult;
   public form!: FormGroup;
   public formFields = SELECT_ENUM;
   public hero!: Hero;

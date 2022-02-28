@@ -7,13 +7,13 @@ import { Hero } from '../interfaces/hero.interface';
   providedIn: 'root'
 })
 export class BattleHeroService {
-  private battleHeroSubject$$ = new BehaviorSubject<Hero>({} as Hero);
+  private battleHero$$ = new BehaviorSubject<Hero>({} as Hero);
 
   public get getBattleHero$(): Observable<Hero> {
-    return this.battleHeroSubject$$.asObservable();
+    return this.battleHero$$.asObservable();
   }
 
   public set setBattleHero(battleHero: Hero) {
-    this.battleHeroSubject$$.next(battleHero);
+    this.battleHero$$.next(battleHero);
   }
 }

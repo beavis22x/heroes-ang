@@ -10,15 +10,15 @@ import { POWER_UPS } from '../const/power-ups.consts';
   providedIn: 'root'
 })
 export class PowerUpsService {
-  private powerUpsSubject$$ = new BehaviorSubject<PowerUps[]>([...POWER_UPS]);
+  private powerUps$$ = new BehaviorSubject<PowerUps[]>([...POWER_UPS]);
 
   public get getPowerUps$ (): Observable<PowerUps[]> {
-    return this.powerUpsSubject$$.asObservable();
+    return this.powerUps$$.asObservable();
   }
 
   public usePowerUp(id: number): void {
-    this.powerUpsSubject$$.next(
-      this.powerUpsSubject$$.getValue().map((item: PowerUps) => {
+    this.powerUps$$.next(
+      this.powerUps$$.getValue().map((item: PowerUps) => {
         if (id === item.id && item.remainAmount > 0) {
           return {
             ...item,
@@ -32,8 +32,8 @@ export class PowerUpsService {
   }
 
   public resetActivePowerUp(id: number): void {
-    this.powerUpsSubject$$.next(
-      this.powerUpsSubject$$.getValue().map((item: PowerUps) => {
+    this.powerUps$$.next(
+      this.powerUps$$.getValue().map((item: PowerUps) => {
         if (id === item.id && item.remainAmount > 0) {
           return {
             ...item,

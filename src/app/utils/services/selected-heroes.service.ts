@@ -8,19 +8,19 @@ import { Hero } from '../interfaces/hero.interface';
   providedIn: 'root'
 })
 export class SelectedHeroesService {
-  private selectedHeroesSubject$$ = new BehaviorSubject<Hero[]>([]);
+  private selectedHeroes$$ = new BehaviorSubject<Hero[]>([]);
 
   public get getSelectedHeroes$(): Observable<Hero[]>{
-    return this.selectedHeroesSubject$$.asObservable();
+    return this.selectedHeroes$$.asObservable();
   }
 
   public addHero(hero: Hero): void {
-      this.selectedHeroesSubject$$.next([...this.selectedHeroesSubject$$.getValue(), hero]);
+      this.selectedHeroes$$.next([...this.selectedHeroes$$.getValue(), hero]);
   }
 
   public removeHero(id: string): void {
-    this.selectedHeroesSubject$$.next(
-      this.selectedHeroesSubject$$.getValue().filter((hero: Hero) => {
+    this.selectedHeroes$$.next(
+      this.selectedHeroes$$.getValue().filter((hero: Hero) => {
         return id !== hero.id;
       })
     )

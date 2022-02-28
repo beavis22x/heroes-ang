@@ -1,1 +1,1 @@
-export type battleResult = 'WIN' | 'LOSE';
+export type BattleResult = 'WIN' | 'LOSE';
