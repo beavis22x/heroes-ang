@@ -1,0 +1,26 @@
+.history-header, .history-item {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  border:  solid 2px var(--primary-color);
+  border-radius: 20px;
+  margin: 0 0 10px;
+  justify-items: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.history-header {
+  font-weight: bold;
+}
+
+.history-header div {
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.3;
+  }
+}
+
+.history-list {
+  color: black;
+}

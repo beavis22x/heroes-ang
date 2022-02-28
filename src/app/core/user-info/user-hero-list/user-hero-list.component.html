@@ -1,0 +1,52 @@
+<div class="hero-list__header">
+  <h1>Hero List</h1>
+  <button *ngIf="selectedHeroes.length"
+          class="battle-arena btn"
+          (click)="routeInBattle()">
+    Battle Arena
+  </button>
+</div>
+<div class="hero-list container">
+
+  <div class="hero-list__amount">
+    Selected heroes: <span>{{selectedHeroes.length}}</span>
+  </div>
+
+  <div class="hero-list__item">
+    <div *ngFor="let hero of selectedHeroes" class="card-hero__item">
+      <div class="card-hero__img">
+        <img [src]="hero.image" alt="hero">
+      </div>
+      <div class="card-hero__description">
+        <ul>
+          <li><h2>{{hero?.name}}</h2></li>
+          <li>Combat: {{hero.powerstats?.combat}}</li>
+          <li>Durability: {{hero.powerstats?.durability}}</li>
+          <li>Intelligence: {{hero.powerstats?.intelligence}}</li>
+          <li>Power: {{hero.powerstats?.power}}</li>
+          <li>Speed: {{hero.powerstats?.speed}}</li>
+          <li>Strength: {{hero.powerstats?.strength}}</li>
+        </ul>
+      </div>
+      <div class="card-hero__buttons">
+        <button class="card-hero__select btn"
+                [disabled]="hero.name === selectedBattleHeroName"
+                (click)="setBattleHero(hero)">
+          Select
+        </button>
+        <button class="card-hero__add btn"
+                (click)="addBtn()">
+          Add
+        </button>
+        <button class="card-hero__add btn"
+                (click)="infoHero(hero.id)">
+          Info
+        </button>
+        <button class="card-hero__delete btn"
+                (click)="deleteHero(hero.id)">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

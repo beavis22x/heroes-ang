@@ -17,12 +17,43 @@ const registration: RouteConfig = {
 
 const heroesRoot: RouteConfig = {
   name: 'heroes-root',
-  path: 'heroes-selection-page',
+  path: 'heroes',
 }
 
 const userRoot: RouteConfig = {
   name: 'user-root',
   path: 'user-info-page',
+}
+
+const userInfo: RouteConfig = {
+  name: 'user-info',
+  path: 'user-info-page',
+  fullpath: '/user-info-page'
+}
+
+const userHeroList: RouteConfig = {
+  name: 'user-hero-list',
+  path: 'hero-list',
+}
+
+const userHistory: RouteConfig = {
+  name: 'user-history',
+  path: 'history'
+}
+
+const userPowerUps: RouteConfig = {
+  name: 'user-power-ups',
+  path: 'power-ups'
+}
+
+const userHeroInfo: RouteConfig = {
+  name: 'user-hero-info',
+  path: 'hero-info'
+}
+
+const battlePage: RouteConfig = {
+  name: 'battle-page',
+  path: 'battle-page'
 }
 
 export const ROUTE_CONFIGS: RouteConfigs = {
@@ -31,4 +62,10 @@ export const ROUTE_CONFIGS: RouteConfigs = {
   registration,
   heroesRoot,
   userRoot,
+  userInfo,
+  userHeroList,
+  userHistory,
+  userPowerUps,
+  userHeroInfo,
+  battlePage,
 }

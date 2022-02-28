@@ -5,3 +5,7 @@ export const randomId = (): string => {
 export const generateToken = (): string => {
   return btoa(Math.random().toString()).substr(10, 5);
 }
+
+export const getRandomId = (): string => {
+  return Math.round(1 + Math.random() * 731).toString();
+}

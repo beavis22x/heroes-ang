@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 
 import { User } from '../interfaces/form.interfaces';
+
 import { generateToken } from '../functions/common.functions';
 
 @Injectable({
@@ -51,7 +52,7 @@ export class AuthService {
       this.storage.setToken(token);
       this.storage.setTokenExpire(expiresDate);
     } else {
-      this.storage.clearStorage();
+      this.storage.clearToken();
     }
   }
 }

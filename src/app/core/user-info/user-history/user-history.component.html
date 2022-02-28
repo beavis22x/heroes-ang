@@ -1,0 +1,38 @@
+<h1>History</h1>
+<div class="history-list ">
+  <article class='history-header'>
+    <div class='history-list__date-header'
+         (click)="sortDate()">
+      Battle date
+    </div>
+    <div class='history-list__hero-header'
+         (click)="sortHero()">
+      <span>Hero name</span>
+    </div>
+    <div class='history-list__opponent-header'
+         (click)="sortOpponent()">
+      <span>Opponent name</span>
+    </div>
+    <div class='history-list__result-header'
+         (click)="sortResult()">
+      <span>Battle result (win/lost)</span>
+    </div>
+  </article>
+
+  <article *ngFor="let battle of history"
+    class='history-item'>
+    <div class='history-item__date'>
+      <span>{{ battle.date | date:'medium'}}</span>
+    </div>
+    <div class='history-item__name'>
+      <span>{{ battle.hero }}</span>
+    </div>
+    <div class='history-item__opponent'>
+      <span>{{ battle.opponent }}</span>
+    </div>
+    <div class='history-item__result'>
+      <span>{{ battle.result }}</span>
+    </div>
+  </article>
+</div>
+
