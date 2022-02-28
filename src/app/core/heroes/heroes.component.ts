@@ -70,6 +70,8 @@ export class HeroesComponent implements OnInit, OnDestroy {
         this.searches = term;
         this.searchList = [...this.searchList, term];
         this.getHeroes();
+
+        this.cd.markForCheck()
       }))
   }
 

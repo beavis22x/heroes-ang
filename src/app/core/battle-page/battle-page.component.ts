@@ -22,7 +22,7 @@ import { HistoryObj } from '../../utils/interfaces/history.interface';
 import { SELECT_ENUM } from '../../utils/enum/form-field.enum';
 
 import { EMPTY_STRING } from '../../utils/const/validators.const';
-import { NULL_STRING, RESULT_LOSE, RESULT_WIN } from '../../utils/const/unsort.consts';
+import { RESULT_LOSE, RESULT_WIN } from '../../utils/const/unsort.consts';
 
 import { getRandomId } from '../../utils/functions/common.functions';
 
@@ -40,7 +40,6 @@ export class BattlePageComponent implements OnInit, OnDestroy {
   public hero!: Hero;
   public opponent!: Hero;
   public powerUps: PowerUps[] = [];
-  public battleHeroId!: string;
   public selectPowerUp!: PowerUps;
   public subscriptions: Subscription = new Subscription();
   public heroPower = 0;
@@ -85,7 +84,7 @@ export class BattlePageComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.battleHeroService.getBattleHero$
       .pipe(
         switchMap((hero: Hero) =>
-          this.heroService.getById(hero?.id || '12')
+          this.heroService.getById(hero?.id || getRandomId())
         )
       )
       .subscribe((hero: Hero) => {
@@ -99,7 +98,6 @@ export class BattlePageComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.heroService.getById(getRandomId())
       .subscribe((opponent: Hero) => {
         this.opponent = opponent;
-        console.log(opponent)
 
         this.cd.markForCheck();
       }))
@@ -130,25 +128,29 @@ export class BattlePageComponent implements OnInit, OnDestroy {
   }
 
   public calcHeroPower(): void {
-    const entries = Object.entries(this.hero.powerstats);
-    entries.map((arr: [string, string]) => {
-      if (arr[1] === NULL_STRING) {
-        return;
+    const powerArr = Object.entries(this.hero.powerstats).map((item:[string, string] ) => {
+      return Number(item[1]);
+    });
+    this.heroPower= powerArr.reduce((sum: number, next: number): number => {
+      if (isNaN(next)) {
+        return sum;
       }
 
-      return this.heroPower += Number(arr[1]);
-    })
+      return sum + next;
+    },0)
   }
 
   public calcOpponentPower(): void {
-    const entries = Object.entries(this.opponent.powerstats);
-    entries.map((arr: [string, string]) => {
-      if (arr[1] === NULL_STRING) {
-        return;
+    const powerArr = Object.entries(this.opponent.powerstats).map((item:[string, string] ) => {
+      return Number(item[1]);
+    });
+    this.opponentPower= powerArr.reduce((sum: number, next: number): number => {
+      if (isNaN(next)) {
+        return sum;
       }
 
-      return this.opponentPower += Number(arr[1]);
-    })
+      return sum + next;
+    },0)
   }
 
   public calcResultBattle() {

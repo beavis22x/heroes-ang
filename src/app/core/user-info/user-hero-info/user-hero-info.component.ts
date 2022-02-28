@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { filter, Subscription } from 'rxjs';
+import { filter, Observable, Subscription } from 'rxjs';
 
 import { HeroesService } from '../../../utils/services/heroes.service';
 
 import { Hero } from '../../../utils/interfaces/hero.interface';
+
 
 @Component({
   selector: 'app-user-hero-info',
@@ -15,6 +16,7 @@ import { Hero } from '../../../utils/interfaces/hero.interface';
 })
 export class UserHeroInfoComponent implements OnInit, OnDestroy {
   public heroId!: string;
+  public hero$!: Observable<Hero>;
   public hero!: Hero;
   public subscriptions: Subscription = new Subscription();
 
@@ -39,11 +41,7 @@ export class UserHeroInfoComponent implements OnInit, OnDestroy {
 
   public getHero(): void {
     this.initHeroId();
-    this.subscriptions.add(this.heroService.getById(this.heroId).subscribe((hero: Hero) => {
-      this.hero = hero;
-
-      this.cd.markForCheck();
-    }))
+    this.hero$ = this.heroService.getById(this.heroId);
   }
 
   ngOnDestroy(): void {

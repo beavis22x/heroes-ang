@@ -1,5 +1,5 @@
 <h1>Hero Info</h1>
-<div class="hero-info__container">
+<div *ngIf="hero$ | async as hero" class="hero-info__container">
   <div class="hero-info__img">
     <img [src]="hero?.image?.url" alt="">
   </div>
@@ -11,9 +11,9 @@
       <ul>
         <li>gender {{hero.appearance?.gender}} </li>
         <li>race {{hero.appearance?.race}}</li>
-<!--        <li>height {{hero.appearance?.height}}</li>-->
-<!--        <li>weight {{hero.appearance?.weight}}</li>-->
-<!--        <li>eye-color {{hero?.appearance?['eye-color']}}</li>-->
+        <li>height {{hero?.appearance?.height}}</li>
+        <li>weight {{hero.appearance?.weight}}</li>
+<!--        <li>eye-color {{ hero?.appearance?['eye-color'] as keyof typeof hero}}</li>-->
 <!--        <li>hair-color {{hero?.appearance?['hair-color']}}</li>-->
       </ul>
     </div>

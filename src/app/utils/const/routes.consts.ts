@@ -17,7 +17,7 @@ const registration: RouteConfig = {
 
 const heroesRoot: RouteConfig = {
   name: 'heroes-root',
-  path: 'heroes-selection-page',
+  path: 'heroes',
 }
 
 const userRoot: RouteConfig = {

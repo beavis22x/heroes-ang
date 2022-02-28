@@ -9,12 +9,10 @@ export class SortService {
 
   public sortDate(array: HistoryObj[], direction: boolean): HistoryObj[] {
     const sortedArray = array.sort((a, b) => {
-        const keyA = new Date(a.date);
-        const keyB = new Date(b.date);
+        const keyA = Number(new Date(a.date));
+        const keyB = Number(new Date(b.date));
 
-        if (keyA < keyB) return -1;
-        if (keyA > keyB) return 1;
-        return 0;
+        return keyA - keyB;
       });
 
     return direction

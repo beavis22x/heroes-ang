@@ -26,7 +26,7 @@ import { ROUTE_CONFIGS } from '../../../utils/const/routes.consts';
 })
 export class UserHeroListComponent implements OnInit, OnDestroy {
   public heroes: Hero[] = [];
-  public selectedBattleHeroName!: string;
+  public selectedBattleHeroName!: string ;
   public selectedHeroes: Hero[] = [];
   public subscriptions: Subscription = new Subscription();
   public routes: RouteConfigs = ROUTE_CONFIGS;
@@ -48,15 +48,17 @@ export class UserHeroListComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.selectedHeroesService.getSelectedHeroes$
       .subscribe((heroes: Hero[]) => {
         this.selectedHeroes = [...heroes];
-        this.setBattleHero(heroes[0]);
+        if(heroes.length < 2) {
+          this.setBattleHero(heroes[0]);
+        }
 
         this.cd.markForCheck();
       }))
   }
 
   public setBattleHero(battleHero: Hero): void {
-    this.selectedBattleHeroName = battleHero?.name;
-    this.battleHeroService.setBattleHero = battleHero;
+      this.selectedBattleHeroName = battleHero?.name;
+      this.battleHeroService.setBattleHero = battleHero;
   }
 
   public deleteHero(id: string): void {
